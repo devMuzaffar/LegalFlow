@@ -1,0 +1,33 @@
+<p-sidebar-layout class="min-h-screen">
+  <!-- Mobile backdrop -->
+  @if (isMobile() && open()) {
+    <p-sidebar-backdrop />
+  }
+
+  <!-- Sidebar -->
+  <p-sidebar
+    id="dashboard-sidebar"
+    [collapsible]="isMobile() ? 'offcanvas' : 'icon'"
+    [overlay]="isMobile()"
+    [(open)]="open"
+  >
+    <p-sidebar-spacer />
+
+    <p-sidebar-aside>
+      <p-sidebar-panel>
+        <app-sidebar />
+      </p-sidebar-panel>
+    </p-sidebar-aside>
+  </p-sidebar>
+
+  <!-- Main content -->
+  <p-sidebar-main>
+    <!-- Header -->
+    <app-header />
+
+    <!-- Body -->
+    <main class="dashboard-content flex-1 overflow-auto p-4">
+      <router-outlet />
+    </main>
+  </p-sidebar-main>
+</p-sidebar-layout>
