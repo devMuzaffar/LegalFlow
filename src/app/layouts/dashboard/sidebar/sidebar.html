@@ -26,7 +26,13 @@
         <p-sidebar-menu>
           @for (item of group.items; track item.label) {
             <p-sidebar-menu-item [collapsible]="!!item.subItems" [defaultOpen]="hasActiveSub(item)">
-              <button pSidebarMenuButton [isActive]="!!item.isActive">
+              <button
+                pSidebarMenuButton
+                [routerLink]="item.route"
+                routerLinkActive
+                #rla="routerLinkActive"
+                [isActive]="rla.isActive"
+              >
                 <svg [pIcon]="item.icon"></svg>
                 <span>{{ item.label }}</span>
                 @if (item.subItems) {
@@ -40,16 +46,18 @@
                 <p-sidebar-menu-sub>
                   @for (sub of item.subItems; track sub.label) {
                     <p-sidebar-menu-sub-item>
-                      <button pSidebarMenuSubButton [isActive]="!!sub.isActive">
+                      <button
+                        pSidebarMenuSubButton
+                        [routerLink]="sub.route"
+                        routerLinkActive
+                        #subRla="routerLinkActive"
+                        [isActive]="subRla.isActive"
+                      >
                         <span>{{ sub.label }}</span>
                       </button>
                     </p-sidebar-menu-sub-item>
                   }
                 </p-sidebar-menu-sub>
-              } @else if (!item.badge) {
-                <button pSidebarMenuAction showOnHover>
-                  <svg data-p-icon="ellipsis-v"></svg>
-                </button>
               }
             </p-sidebar-menu-item>
           }
