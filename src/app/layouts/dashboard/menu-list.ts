@@ -16,38 +16,28 @@ export interface NavGroup {
 // Menu List
 export const NAV_GROUPS: NavGroup[] = [
     {
-        label: 'Navigation',
+        label: 'Workspace',
         items: [
-            { icon: 'home', label: 'Home', isActive: true },
-            { icon: 'inbox', label: 'Inbox', badge: '12' },
-            { icon: 'search', label: 'Search' },
-            { icon: 'bell', label: 'Notifications', badge: '3' },
+            { icon: 'chart-pie', label: 'Overview', isActive: true },
+            { icon: 'briefcase', label: 'Matters' },
+            { icon: 'folder', label: 'Documents' },
+            { icon: 'file-check', label: 'Document Review' },
         ],
     },
     {
-        label: 'Projects',
-        action: true,
+        label: 'Discovery',
         items: [
-            {
-                icon: 'chart-bar',
-                label: 'Analytics',
-                subItems: [{ label: 'Overview', isActive: true }, { label: 'Reports' }, { label: 'Real-time' }],
-            },
-            { icon: 'users', label: 'Team' },
-            { icon: 'calendar', label: 'Calendar' },
-            {
-                icon: 'folder',
-                label: 'Documents',
-                subItems: [{ label: 'Shared' }, { label: 'Private' }, { label: 'Archived' }],
-            },
+            { icon: 'cog', label: 'Processing Jobs' },
+            { icon: 'search', label: 'Search & Discovery' },
+            { icon: 'file-export', label: 'Production Exports' },
         ],
     },
     {
-        label: 'Billing',
+        label: 'Governance',
         items: [
-            { icon: 'credit-card', label: 'Payments' },
-            { icon: 'shopping-cart', label: 'Orders' },
-            { icon: 'star', label: 'Subscriptions' },
+            { icon: 'history', label: 'Audit Logs' },
+            { icon: 'users', label: 'User Management' },
+            { icon: 'shield', label: 'Role Management' },
         ],
     },
 ];
