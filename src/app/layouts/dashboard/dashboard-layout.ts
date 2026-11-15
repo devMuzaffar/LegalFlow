@@ -14,6 +14,7 @@ export class DashboardLayout implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   protected readonly isMobile = signal(false);
   protected readonly open = signal(true);
+  protected readonly year = new Date().getFullYear();
 
   // Mobile Logic
   ngOnInit(): void {

@@ -4,7 +4,7 @@ import { ButtonDirective } from 'primeng/button';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonDirective],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
 })
 export class App {

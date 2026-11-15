@@ -9,13 +9,15 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     providePrimeNG({
+      ripple: true,
       theme: {
         preset: Aura,
         options: {
           darkModeSelector: 'none',
-        }
+        },
       },
-      license: 'eyJpZCI6ImU0ZDQ3M2E1LWE1YTAtNGExNC1iNjZhLTgyZWI5OTMxMDM1YyIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3OTQ0MjY1NzcsImV4cCI6MTgyNTk2MjU3N30.1q3pAdeE1lK0bRbGOKJwtuLcTcpRrwXexV0unwU55uJylW7IddiKkpSIevFJCjcg1DomXCt1sSCCyJpsj5fABw'
-    })
-  ]
+      license:
+        'eyJpZCI6ImU0ZDQ3M2E1LWE1YTAtNGExNC1iNjZhLTgyZWI5OTMxMDM1YyIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3OTQ0MjY1NzcsImV4cCI6MTgyNTk2MjU3N30.1q3pAdeE1lK0bRbGOKJwtuLcTcpRrwXexV0unwU55uJylW7IddiKkpSIevFJCjcg1DomXCt1sSCCyJpsj5fABw',
+    }),
+  ],
 };

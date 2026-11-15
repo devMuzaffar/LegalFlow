@@ -1,17 +1,16 @@
 import { Routes } from '@angular/router';
-import { AuthLayout } from './layouts/auth/auth-layout';
-import { DashboardLayout } from './layouts/dashboard/dashboard-layout';
 
 export const routes: Routes = [
     {
         path: 'auth',
-        component: AuthLayout,
-        children: [
-        ],
+        loadComponent: () => import('./layouts/auth/auth-layout').then(m => m.AuthLayout),
+        loadChildren: () => import('./pages/auth/auth.routes').then(m => m.authRoutes),
     },
     {
         path: '',
-        component: DashboardLayout,
-        children: [],
+        loadComponent: () => import('./layouts/dashboard/dashboard-layout').then(m => m.DashboardLayout),
+        children: [
+            // Lazy load dashboard pages here
+        ],
     },
 ];

@@ -1,3 +1,4 @@
+// Types
 export interface NavItem {
     icon: string;
     label: string;
@@ -12,6 +13,7 @@ export interface NavGroup {
     items: NavItem[];
 }
 
+// Menu List
 export const NAV_GROUPS: NavGroup[] = [
     {
         label: 'Navigation',
