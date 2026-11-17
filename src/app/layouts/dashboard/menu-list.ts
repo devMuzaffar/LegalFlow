@@ -20,7 +20,7 @@ export const NAV_GROUPS: NavGroup[] = [
     {
         label: 'Workspace',
         items: [
-            { icon: 'chart-pie', label: 'Overview', route: '/' },
+            { icon: 'chart-pie', label: 'Overview', route: '/overview' },
             { icon: 'briefcase', label: 'Matters', route: '/matters' },
             { icon: 'folder', label: 'Documents', route: '/documents' },
             { icon: 'file-check', label: 'Document Review', route: '/document-review' },
@@ -43,7 +43,3 @@ export const NAV_GROUPS: NavGroup[] = [
         ],
     },
 ];
-
-export function hasActiveSub(item: NavItem): boolean {
-    return !!item.subItems?.some((sub) => sub.isActive);
-}

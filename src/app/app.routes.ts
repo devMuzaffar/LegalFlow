@@ -6,11 +6,12 @@ export const routes: Routes = [
         loadComponent: () => import('./layouts/auth/auth-layout').then(m => m.AuthLayout),
         loadChildren: () => import('./pages/auth/auth.routes').then(m => m.authRoutes),
     },
+    // App entry point: unauthenticated users land on the login screen.
+    // Default Entry of your page
+    { path: '', pathMatch: 'full', redirectTo: 'overview' },
     {
         path: '',
         loadComponent: () => import('./layouts/dashboard/dashboard-layout').then(m => m.DashboardLayout),
-        children: [
-            // Lazy load dashboard pages here
-        ],
+        loadChildren: () => import('./pages/dashboard/app.routes').then(m => m.dashboardRoutes),
     },
 ];

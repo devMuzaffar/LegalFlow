@@ -1,44 +1,82 @@
 <div>
   <!-- Header -->
-  <auth-page-header title="Welcome back" subtitle="Please enter your details to sign in to your account." />
+  <auth-page-header
+    title="Welcome back"
+    subtitle="Please enter your details to sign in to your account."
+  />
 
   <!-- Login Form -->
   <form (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
     <!-- Email Field -->
     <div class="flex flex-col gap-2">
-      <label for="email" class="text-sm font-medium text-surface-900">
-        Email address
-      </label>
-      <input id="email" type="email" pInputText [(ngModel)]="email" name="email" placeholder="name@company.com"
-        class="w-full" required />
+      <label for="email" class="text-sm font-medium text-surface-900"> Email address </label>
+      <input
+        id="email"
+        type="email"
+        pInputText
+        [(ngModel)]="email"
+        name="email"
+        placeholder="name@company.com"
+        class="w-full"
+        required
+      />
     </div>
 
     <!-- Password Field -->
     <div class="flex flex-col gap-2">
-      <div class="flex items-center justify-between">
-        <label for="password" class="text-sm font-medium text-surface-900">
-          Password
-        </label>
-        <a routerLink="/auth/forgot-password" class="text-sm font-medium text-primary hover:underline">
-          Forgot password?
-        </a>
-      </div>
+      <label for="password" class="text-sm font-medium text-surface-900"> Password </label>
       <p-iconfield class="w-full">
-        <input id="password" pInputPassword [(mask)]="isPasswordMasked" [(ngModel)]="password" name="password"
-          placeholder="Enter your password" class="w-full" required />
+        <input
+          id="password"
+          pInputPassword
+          [(mask)]="isPasswordMasked"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Enter your password"
+          class="w-full"
+          required
+        />
         <p-inputicon class="cursor-pointer" (click)="isPasswordMasked = !isPasswordMasked">
           @if (isPasswordMasked) {
-          <svg data-p-icon="eye" class="text-surface-500"></svg>
+            <svg data-p-icon="eye" class="text-surface-500"></svg>
           } @else {
-          <svg data-p-icon="eye-slash" class="text-surface-500"></svg>
+            <svg data-p-icon="eye-slash" class="text-surface-500"></svg>
           }
         </p-inputicon>
       </p-iconfield>
     </div>
 
     <!-- Submit Button -->
-    <button pButton type="submit" class="w-full">
-      Login
-    </button>
+    <button pButton type="submit" class="w-full">Login</button>
   </form>
+
+  <!-- Divider -->
+  <div class="my-6 flex items-center gap-3">
+    <span class="h-px flex-1 bg-surface-200"></span>
+    <span class="text-xs font-semibold tracking-wider text-muted-color whitespace-nowrap"
+      >OR TRY DEMO</span
+    >
+    <span class="h-px flex-1 bg-surface-200"></span>
+  </div>
+
+  <!-- Demo Roles: one-tap sign-in as a seeded account (single row at every width) -->
+  <div class="grid grid-cols-3 items-stretch gap-3">
+    @for (role of demoRoles; track role.id) {
+      <button
+        pButton
+        type="button"
+        severity="secondary"
+        [outlined]="true"
+        class="h-full w-full justify-start! py-3!"
+        (click)="onDemoLogin(role.id)"
+      >
+        <span
+          class="flex min-w-0 flex-col items-start gap-0.5 text-left leading-tight whitespace-normal"
+        >
+          <span class="font-semibold">{{ role.label }}</span>
+          <span class="text-xs font-normal text-muted-color">{{ role.description }}</span>
+        </span>
+      </button>
+    }
+  </div>
 </div>

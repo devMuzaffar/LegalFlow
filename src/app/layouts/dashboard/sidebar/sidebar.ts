@@ -5,7 +5,7 @@ import { PIcon } from '@primeicons/angular/p-icon';
 import { Plus } from '@primeicons/angular/plus';
 import { AvatarModule } from 'primeng/avatar';
 import { SidebarModule } from 'primeng/sidebar';
-import { NAV_GROUPS, hasActiveSub } from '../menu-list';
+import { NAV_GROUPS } from '../menu-list';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,5 +19,4 @@ import { NAV_GROUPS, hasActiveSub } from '../menu-list';
 })
 export class DashboardSidebar {
   protected readonly navGroups = NAV_GROUPS;
-  protected readonly hasActiveSub = hasActiveSub;
 }

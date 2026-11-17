@@ -1,21 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { Eye } from '@primeicons/angular/eye';
+import { EyeSlash } from '@primeicons/angular/eye-slash';
 import { ButtonDirective } from 'primeng/button';
-import { Checkbox } from 'primeng/checkbox';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputPassword } from 'primeng/inputpassword';
 import { InputText } from 'primeng/inputtext';
-import { Eye } from '@primeicons/angular/eye';
-import { EyeSlash } from '@primeicons/angular/eye-slash';
 import { AuthPageHeader } from '../components/auth-page-header';
+
+/** Seed accounts available on the demo login screen. */
+export interface DemoRole {
+  id: string;
+  label: string;
+  description: string;
+}
 
 @Component({
   selector: 'app-login',
   imports: [
     FormsModule,
-    RouterLink,
     InputText,
     InputPassword,
     IconField,
@@ -28,12 +33,31 @@ import { AuthPageHeader } from '../components/auth-page-header';
   templateUrl: './login.html',
 })
 export class Login {
+  private readonly router = inject(Router);
+
   email = '';
   password = '';
-  rememberMe = false;
   isPasswordMasked = true;
 
+  /** One-tap demo sign-in options shown under the "OR TRY DEMO" divider. */
+  readonly demoRoles: DemoRole[] = [
+    { id: 'matter-admin', label: 'Matter Admin', description: 'Full workspace access' },
+    { id: 'lead-reviewer', label: 'Lead Reviewer', description: 'Document review and coding' },
+    {
+      id: 'compliance-auditor',
+      label: 'Compliance Auditor',
+      description: 'Read-only access and audit verification',
+    },
+  ];
+
   onSubmit(): void {
-    // Handle login submission
+    // TODO: authenticate with the entered credentials
+  }
+
+  /** Signs in as the selected demo role, then enters the dashboard. */
+  onDemoLogin(roleId: string): void {
+    // TODO: authenticate as the demo user for this role (no backend yet)
+    console.log('demo login:', roleId);
+    this.router.navigate(['/overview']);
   }
 }

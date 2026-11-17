@@ -1,51 +1,63 @@
-<!-- Sidebar Header -->
+<!-- Sidebar Header: brand / workspace switcher -->
 <p-sidebar-header>
   <p-sidebar-menu>
     <p-sidebar-menu-item>
+      <!-- Button: the brand row -->
       <button pSidebarMenuButton class="p-1!">
         <div
           class="flex size-6 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-violet-500 to-indigo-600 text-white text-xs font-bold leading-none"
         >
-          A
+          LF
         </div>
-        <span class="font-semibold text-sm">Acme Inc</span>
+        <span class="font-semibold text-sm">LegalFlow</span>
       </button>
     </p-sidebar-menu-item>
   </p-sidebar-menu>
 </p-sidebar-header>
 
-<!-- Sidebar Menu -->
+<!-- Sidebar Menu (scrolling area) -->
 <p-sidebar-content>
+  <!-- Group: e.g. Workspace / Discovery / Governance -->
   @for (group of navGroups; track group.label) {
     <p-sidebar-group>
+      <!-- Group label: the small uppercase heading -->
       <p-sidebar-group-label>{{ group.label }}</p-sidebar-group-label>
+      <!-- Group action: optional "+" button beside the label -->
       @if (group.action) {
         <button pSidebarGroupAction><svg data-p-icon="plus"></svg></button>
       }
+      <!-- Group content: wraps the list of items -->
       <p-sidebar-group-content>
         <p-sidebar-menu>
+          <!-- Item: one nav row (wraps its button + optional badge/submenu) -->
           @for (item of group.items; track item.label) {
-            <p-sidebar-menu-item [collapsible]="!!item.subItems" [defaultOpen]="hasActiveSub(item)">
+            <p-sidebar-menu-item [collapsible]="!!item.subItems">
+              <!-- Button: the clickable nav link itself -->
               <button
                 pSidebarMenuButton
                 [routerLink]="item.route"
                 routerLinkActive
                 #rla="routerLinkActive"
+                [routerLinkActiveOptions]="{ exact: item.route === '/' }"
                 [isActive]="rla.isActive"
               >
                 <svg [pIcon]="item.icon"></svg>
                 <span>{{ item.label }}</span>
+                <!-- Chevron: only when the item has subItems -->
                 @if (item.subItems) {
                   <svg data-p-icon="chevron-down" class="ml-auto"></svg>
                 }
               </button>
+              <!-- Badge: count pill on the right of the item -->
               @if (item.badge) {
                 <p-sidebar-menu-badge>{{ item.badge }}</p-sidebar-menu-badge>
               }
+              <!-- Submenu: nested list, only when the item has subItems -->
               @if (item.subItems) {
                 <p-sidebar-menu-sub>
                   @for (sub of item.subItems; track sub.label) {
                     <p-sidebar-menu-sub-item>
+                      <!-- Sub button: clickable child nav link -->
                       <button
                         pSidebarMenuSubButton
                         [routerLink]="sub.route"
@@ -67,10 +79,11 @@
   }
 </p-sidebar-content>
 
-<!-- Sidebar Footer -->
+<!-- Sidebar Footer: user profile row -->
 <p-sidebar-footer>
   <p-sidebar-menu>
     <p-sidebar-menu-item>
+      <!-- Button: user row (avatar + name) -->
       <button pSidebarMenuButton class="px-2! py-4!">
         <p-avatar label="AK" shape="circle" class="size-6 shrink-0 text-xs" />
         <span>Asif Khan</span>
@@ -79,4 +92,5 @@
   </p-sidebar-menu>
 </p-sidebar-footer>
 
+<!-- Rail: thin drag/resize handle on the sidebar edge -->
 <button pSidebarRail></button>
