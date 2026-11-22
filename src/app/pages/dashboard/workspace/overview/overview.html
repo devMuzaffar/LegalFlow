@@ -1,8 +1,83 @@
-<!-- Placeholder: replace with the real workspace overview. -->
-<div>
-  <dashboard-page-header title="Overview" subtitle="Workspace overview goes here." />
+<!--
+  ECA Command Center — /overview
+
+  Every direct child here is one grid item of the dashboard layout grid
+  (12 columns, default span 12). Each zone is a div carrying its own span,
+  wrapping a presentational component that receives plain values.
+-->
+
+<!-- ── Page header (matter switcher lives in the action slot) ─────────────── -->
+<div class="col-span-12">
+  <dashboard-page-header
+    title="ECA Command Center"
+    subtitle="Ingestion, review and governance at a glance."
+  >
+    <p-select
+      class="w-full sm:w-64"
+      [options]="matterOptions"
+      optionLabel="label"
+      optionValue="value"
+      [ngModel]="activeMatterId()"
+      (ngModelChange)="onMatterChange($event)"
+      placeholder="Select matter"
+      ariaLabel="Active matter"
+    />
+  </dashboard-page-header>
 </div>
 
-<div class="md:col-span-6">My Chart</div>
+<!-- ── Zone 1: Matter context strip ───────────────────────────────────────── -->
+<div class="col-span-12">
+  <app-matter-context-strip [matter]="matter()" />
+</div>
 
-<div class="md:col-span-6">My Notes</div>
+<!-- ── Zone 2: KPI cards (1 → 2 → 4 across) ───────────────────────────────── -->
+<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+  <app-kpi-ingestion
+    [uploaded]="matter().uploaded"
+    [reviewReady]="matter().reviewReady"
+    [dedupPct]="dedupPct()"
+  />
+</div>
+
+<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+  <app-kpi-review-velocity
+    [codedPct]="codedPct()"
+    [coded]="matter().coded"
+    [pending]="matter().pending"
+  />
+</div>
+
+<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+  <app-kpi-risk-flags
+    [privilege]="matter().privilegeFlags"
+    [pii]="matter().piiFlags"
+    [reversed]="matter().humanReversed"
+  />
+</div>
+
+<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+  <app-kpi-byok
+    [vaultGb]="matter().vaultGb"
+    [tokensM]="tokensM()"
+    [perDocFee]="matter().perDocFee"
+  />
+</div>
+
+<!-- ── Zone 3: Automated processing pipeline ──────────────────────────────── -->
+<div class="col-span-12">
+  <app-pipeline-strip [steps]="matter().pipeline" />
+</div>
+
+<!-- ── Zone 4: 60 / 40 action split─────────────────────────── -->
+<div class="col-span-12 lg:col-span-7">
+  <app-custodian-risk [custodians]="matter().custodians" />
+</div>
+
+<div class="col-span-12 lg:col-span-5">
+  <app-audit-feed [entries]="matter().audit" />
+</div>
+
+<!-- ── Zone 5: File type mix ──────────────────────────────────────────────── -->
+<div class="col-span-12">
+  <app-file-type-mix [fileTypes]="matter().fileTypes" />
+</div>

@@ -1,0 +1,17 @@
+<p-card class="flex h-full flex-col">
+  <header class="flex items-start justify-between gap-2">
+    <h2 class="text-[11px] font-semibold uppercase tracking-wide text-muted-color">
+      BYOK Usage Meter
+    </h2>
+    <p-tag value="own key" severity="secondary" [rounded]="true" />
+  </header>
+
+  <p class="mt-2 text-2xl font-semibold leading-none text-surface-900">
+    {{ vaultGb() }} <span class="text-xs font-normal text-muted-color">GB vault</span>
+  </p>
+
+  <p class="mt-2 text-xs text-muted-color">
+    <span class="font-semibold text-surface-900">{{ tokensM() }}M</span> tokens ·
+    <span class="font-semibold text-emerald-700">${{ perDocFee() }}</span> per-doc AI fee
+  </p>
+</p-card>

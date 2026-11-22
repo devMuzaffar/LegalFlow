@@ -1,0 +1,39 @@
+<section class="flex flex-col rounded-border border border-surface bg-surface-0 p-4">
+  <header class="mb-2 flex items-center justify-between gap-2">
+    <h2 class="text-[11px] font-semibold uppercase tracking-wide text-muted-color">
+      Recent audit feed
+    </h2>
+    <a routerLink="/audit-logs" class="text-[11px] font-medium text-primary hover:underline">
+      Audit logs →
+    </a>
+  </header>
+
+  <p-timeline [value]="events()" layout="vertical">
+    <ng-template #content let-entry>
+      <div class="flex flex-col gap-1 pb-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <p-tag
+            [value]="label(entry.action)"
+            [severity]="severity(entry.action)"
+            [rounded]="true"
+          />
+          <span class="text-[10px] text-muted-color">{{ ago(entry.minutesAgo) }}</span>
+        </div>
+
+        <div class="flex items-center justify-between gap-2 text-[11px]">
+          <span class="font-mono text-surface-900">{{ entry.docId }}</span>
+          <span class="truncate text-muted-color">{{ entry.actorRole }}</span>
+        </div>
+
+        <span
+          class="truncate font-mono text-[10px] text-muted-color"
+          [pTooltip]="entry.sha256"
+          tooltipPosition="top"
+          [showDelay]="300"
+        >
+          {{ shortHash(entry.sha256) }}
+        </span>
+      </div>
+    </ng-template>
+  </p-timeline>
+</section>
