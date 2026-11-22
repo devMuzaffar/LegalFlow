@@ -26,7 +26,11 @@
     <app-header />
 
     <!-- Body -->
-    <main class="dashboard-content flex-1 overflow-auto p-4">
+    <!-- Router-outlet renders as element so needs to disable, else it will be treated as div causing issues -->
+    <!-- router-outlet is an anchor, bottom is where out actual page renders -->
+    <main
+      class="flex-1 overflow-auto p-4 grid grid-cols-12 gap-4 content-start [&>router-outlet]:hidden [&>*:not(router-outlet)]:contents [:where(&)>*>*]:col-span-12"
+    >
       <router-outlet />
     </main>
 

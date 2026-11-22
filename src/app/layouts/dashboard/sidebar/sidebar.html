@@ -22,10 +22,6 @@
     <p-sidebar-group>
       <!-- Group label: the small uppercase heading -->
       <p-sidebar-group-label>{{ group.label }}</p-sidebar-group-label>
-      <!-- Group action: optional "+" button beside the label -->
-      @if (group.action) {
-        <button pSidebarGroupAction><svg data-p-icon="plus"></svg></button>
-      }
       <!-- Group content: wraps the list of items -->
       <p-sidebar-group-content>
         <p-sidebar-menu>
