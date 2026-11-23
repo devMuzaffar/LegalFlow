@@ -1,22 +1,19 @@
-<p-card class="flex h-full flex-col">
-  <header class="flex items-start justify-between gap-2">
-    <h2 class="text-[11px] font-semibold uppercase tracking-wide text-muted-color">
-      Review Velocity
-    </h2>
-    <span class="text-[11px] font-medium text-muted-color">coded</span>
-  </header>
+<app-card title="Review Velocity">
+  <div
+    action
+    class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700"
+  >
+    <i class="pi pi-bolt text-sm"></i>
+  </div>
 
-  <p class="mt-2 text-2xl font-semibold leading-none text-surface-900">{{ codedPct() }}%</p>
+  <div class="flex flex-1 flex-col gap-4">
+    <p class="text-2xl font-semibold leading-none text-surface-900">{{ codedPct() }}%</p>
 
-  <p-progressbar
-    class="mt-2 block"
-    [value]="codedPct()"
-    [showValue]="false"
-    [style]="{ height: '6px' }"
-  />
+    <p-progressbar [value]="codedPct()" [showValue]="false" [style]="{ height: '6px' }" />
 
-  <p class="mt-2 text-xs text-muted-color">
-    <span class="font-semibold text-surface-900">{{ coded() | number }}</span> done /
-    <span class="font-semibold text-surface-900">{{ pending() | number }}</span> pending
-  </p>
-</p-card>
+    <p class="text-xs text-muted-color">
+      <span class="font-semibold text-surface-900">{{ coded() | number }}</span> done /
+      <span class="font-semibold text-surface-900">{{ pending() | number }}</span> pending
+    </p>
+  </div>
+</app-card>

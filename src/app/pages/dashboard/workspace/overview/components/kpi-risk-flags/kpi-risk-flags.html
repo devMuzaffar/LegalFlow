@@ -1,25 +1,26 @@
-<p-card class="flex h-full flex-col">
-  <header class="flex items-start justify-between gap-2">
-    <h2 class="text-[11px] font-semibold uppercase tracking-wide text-muted-color">
-      AI Risk Flags
-    </h2>
-    <span class="text-[11px] font-medium text-muted-color">pre-scan</span>
-  </header>
-
-  <div class="mt-3 flex flex-col gap-2">
-    <div class="flex items-center justify-between gap-2">
-      <span class="text-[11px] text-muted-color">Privilege</span>
-      <p-tag [value]="privilegeLabel()" severity="danger" [rounded]="true" />
-    </div>
-
-    <div class="flex items-center justify-between gap-2">
-      <span class="text-[11px] text-muted-color">PII/PHI</span>
-      <p-tag [value]="piiLabel()" severity="warn" [rounded]="true" />
-    </div>
-
-    <div class="flex items-center justify-between gap-2">
-      <span class="text-[11px] text-muted-color">Human-Reversed</span>
-      <p-tag [value]="reversedLabel()" severity="secondary" [rounded]="true" />
-    </div>
+<app-card title="AI Risk Flags">
+  <div action class="flex h-9 w-9 items-center justify-center rounded-lg bg-rose-50 text-rose-700">
+    <i class="pi pi-shield text-sm"></i>
   </div>
-</p-card>
+
+  <div class="flex flex-1 flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-[11px] text-muted-color">Privilege</span>
+        <p-tag [value]="privilegeLabel()" severity="danger" />
+      </div>
+
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-[11px] text-muted-color">PII/PHI</span>
+        <p-tag [value]="piiLabel()" severity="warn" />
+      </div>
+
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-[11px] text-muted-color">Human-Reversed</span>
+        <p-tag [value]="reversedLabel()" severity="secondary" />
+      </div>
+    </div>
+
+    <p class="text-xs text-muted-color">AI pre-scan · human review overrides applied</p>
+  </div>
+</app-card>

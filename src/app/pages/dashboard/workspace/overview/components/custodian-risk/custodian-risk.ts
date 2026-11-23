@@ -5,12 +5,13 @@ import { ButtonDirective } from 'primeng/button';
 import { ProgressBar } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
+import { AppCard } from '../../../../components/app-card/app-card';
 import { Custodian } from '../../data/matters';
 
 /** Zone 4 left — per-custodian document and risk counts. */
 @Component({
     selector: 'app-custodian-risk',
-    imports: [TableModule, Tag, RouterLink, ButtonDirective, DecimalPipe, ProgressBar],
+    imports: [AppCard, TableModule, Tag, RouterLink, ButtonDirective, DecimalPipe, ProgressBar],
     templateUrl: './custodian-risk.html',
     host: { class: 'block' },
 })

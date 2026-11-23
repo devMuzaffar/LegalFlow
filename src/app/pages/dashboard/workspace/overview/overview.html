@@ -31,7 +31,7 @@
 </div>
 
 <!-- ── Zone 2: KPI cards (1 → 2 → 4 across) ───────────────────────────────── -->
-<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+<div class="col-span-12 sm:col-span-6 lg:col-span-3">
   <app-kpi-ingestion
     [uploaded]="matter().uploaded"
     [reviewReady]="matter().reviewReady"
@@ -39,7 +39,7 @@
   />
 </div>
 
-<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+<div class="col-span-12 sm:col-span-6 lg:col-span-3">
   <app-kpi-review-velocity
     [codedPct]="codedPct()"
     [coded]="matter().coded"
@@ -47,7 +47,7 @@
   />
 </div>
 
-<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+<div class="col-span-12 sm:col-span-6 lg:col-span-3">
   <app-kpi-risk-flags
     [privilege]="matter().privilegeFlags"
     [pii]="matter().piiFlags"
@@ -55,7 +55,7 @@
   />
 </div>
 
-<div class="col-span-12 sm:col-span-6 xl:col-span-3">
+<div class="col-span-12 sm:col-span-6 lg:col-span-3">
   <app-kpi-byok
     [vaultGb]="matter().vaultGb"
     [tokensM]="tokensM()"
@@ -69,11 +69,11 @@
 </div>
 
 <!-- ── Zone 4: 60 / 40 action split─────────────────────────── -->
-<div class="col-span-12 lg:col-span-7">
+<div class="col-span-12 lg:col-span-8">
   <app-custodian-risk [custodians]="matter().custodians" />
 </div>
 
-<div class="col-span-12 lg:col-span-5">
+<div class="col-span-12 lg:col-span-4">
   <app-audit-feed [entries]="matter().audit" />
 </div>
 

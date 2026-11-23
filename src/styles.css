@@ -2,6 +2,4 @@
 
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
-
-/* Icon font used by PrimeNG's own icon API (p-tag icon, p-select chevron, ...) */
 @import 'primeicons/primeicons.css';

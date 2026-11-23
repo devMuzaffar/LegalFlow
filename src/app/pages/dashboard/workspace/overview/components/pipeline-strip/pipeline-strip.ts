@@ -3,12 +3,13 @@ import { RouterLink } from '@angular/router';
 import { ProgressBar } from 'primeng/progressbar';
 import { Tag } from 'primeng/tag';
 import { Tooltip } from 'primeng/tooltip';
+import { AppCard } from '../../../../components/app-card/app-card';
 import { PipelineStep } from '../../data/matters';
 
 /** Zone 3 — automated processing pipeline as a 5-step tracker. */
 @Component({
     selector: 'app-pipeline-strip',
-    imports: [RouterLink, ProgressBar, Tag, Tooltip],
+    imports: [AppCard, RouterLink, ProgressBar, Tag, Tooltip],
     templateUrl: './pipeline-strip.html',
     host: { class: 'block h-full' },
 })

@@ -1,19 +1,12 @@
-<section class="h-full rounded-border border border-surface bg-surface-0 p-4">
-  <header class="mb-3 flex flex-wrap items-center justify-between gap-2">
-    <div class="flex items-center gap-2">
-      <h2 class="text-[11px] font-semibold uppercase tracking-wide text-muted-color">
-        Automated processing pipeline
-      </h2>
-      <p-tag
-        [value]="done() + '/' + steps().length + ' complete'"
-        severity="secondary"
-        [rounded]="true"
-      />
-    </div>
-    <a routerLink="/processing-jobs" class="text-xs font-medium text-primary hover:underline">
-      View processing jobs →
-    </a>
-  </header>
+<app-card title="Automated processing pipeline">
+  <a action routerLink="/processing-jobs" class="text-xs font-medium text-primary hover:underline">
+    View processing jobs →
+  </a>
+
+  <div class="flex items-center justify-between gap-2">
+    <p-tag [value]="done() + '/' + steps().length + ' complete'" severity="secondary" />
+    <p-tag [value]="'Overall ' + overallPct() + '%'" severity="info" />
+  </div>
 
   <ol class="flex flex-wrap gap-2">
     @for (step of steps(); track step.label; let i = $index) {
@@ -24,11 +17,7 @@
         [showDelay]="300"
       >
         <div class="flex items-center gap-1.5">
-          <p-tag
-            [value]="'' + (i + 1)"
-            [severity]="isComplete(step) ? 'success' : 'info'"
-            [rounded]="true"
-          />
+          <p-tag [value]="'' + (i + 1)" [severity]="isComplete(step) ? 'success' : 'info'" />
           <span class="truncate text-[11px] font-medium text-surface-900">{{ step.label }}</span>
         </div>
 
@@ -45,6 +34,4 @@
       </li>
     }
   </ol>
-
-  <p-tag class="mt-3" [value]="'Overall ' + overallPct() + '%'" severity="info" [rounded]="true" />
-</section>
+</app-card>

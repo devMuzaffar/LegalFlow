@@ -83,11 +83,14 @@ const FINCORP: Matter = {
         { label: 'AI Pre-Scan', progress: 92, detail: '7,000 of 7,610 scanned' },
     ],
     custodians: [
-        { id: 'c-1024', name: 'Sarah Chen', totalDocs: 2140, piiCount: 92, privilegeCount: 41, reviewed: 1802 },
-        { id: 'c-1025', name: 'Marcus Webb', totalDocs: 1865, piiCount: 71, privilegeCount: 28, reviewed: 1210 },
-        { id: 'c-1026', name: 'Priya Nair', totalDocs: 1540, piiCount: 64, privilegeCount: 33, reviewed: 987 },
-        { id: 'c-1027', name: 'David Okafor', totalDocs: 1205, piiCount: 58, privilegeCount: 22, reviewed: 640 },
-        { id: 'c-1028', name: 'Lena Fischer', totalDocs: 860, piiCount: 33, privilegeCount: 18, reviewed: 231 },
+        { id: 'c-1024', name: 'Sarah Chen', totalDocs: 1480, piiCount: 68, privilegeCount: 30, reviewed: 1240 },
+        { id: 'c-1025', name: 'Marcus Webb', totalDocs: 1265, piiCount: 52, privilegeCount: 22, reviewed: 1010 },
+        { id: 'c-1026', name: 'Priya Nair', totalDocs: 1120, piiCount: 47, privilegeCount: 24, reviewed: 903 },
+        { id: 'c-1027', name: 'David Okafor', totalDocs: 985, piiCount: 43, privilegeCount: 18, reviewed: 745 },
+        { id: 'c-1028', name: 'Lena Fischer', totalDocs: 870, piiCount: 34, privilegeCount: 15, reviewed: 512 },
+        { id: 'c-1029', name: 'Omar Haddad', totalDocs: 720, piiCount: 29, privilegeCount: 13, reviewed: 288 },
+        { id: 'c-1030', name: 'Grace Lim', totalDocs: 640, piiCount: 25, privilegeCount: 11, reviewed: 112 },
+        { id: 'c-1031', name: 'Tomás Rivera', totalDocs: 530, piiCount: 20, privilegeCount: 9, reviewed: 60 },
     ],
     audit: [
         {
@@ -160,9 +163,14 @@ const HALCYON: Matter = {
         { label: 'AI Pre-Scan', progress: 64, detail: '1,395 of 2,180 scanned' },
     ],
     custodians: [
-        { id: 'c-2011', name: 'Alan Reyes', totalDocs: 980, piiCount: 34, privilegeCount: 18, reviewed: 620 },
-        { id: 'c-2012', name: 'Mona Sato', totalDocs: 760, piiCount: 24, privilegeCount: 12, reviewed: 480 },
-        { id: 'c-2013', name: 'Tom Bauer', totalDocs: 440, piiCount: 16, privilegeCount: 8, reviewed: 220 },
+        { id: 'c-2011', name: 'Alan Reyes', totalDocs: 420, piiCount: 15, privilegeCount: 8, reviewed: 300 },
+        { id: 'c-2012', name: 'Mona Sato', totalDocs: 360, piiCount: 12, privilegeCount: 7, reviewed: 245 },
+        { id: 'c-2013', name: 'Tom Bauer', totalDocs: 310, piiCount: 11, privilegeCount: 6, reviewed: 200 },
+        { id: 'c-2014', name: 'Ivy Nakamura', totalDocs: 275, piiCount: 9, privilegeCount: 5, reviewed: 165 },
+        { id: 'c-2015', name: 'Rafael Costa', totalDocs: 240, piiCount: 8, privilegeCount: 4, reviewed: 130 },
+        { id: 'c-2016', name: 'Hana Petrova', totalDocs: 220, piiCount: 7, privilegeCount: 3, reviewed: 105 },
+        { id: 'c-2017', name: 'Samir Aziz', totalDocs: 195, piiCount: 7, privilegeCount: 3, reviewed: 95 },
+        { id: 'c-2018', name: 'Elena Marsh', totalDocs: 160, piiCount: 5, privilegeCount: 2, reviewed: 80 },
     ],
     audit: [
         {

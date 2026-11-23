@@ -3,12 +3,13 @@ import { RouterLink } from '@angular/router';
 import { Tag } from 'primeng/tag';
 import { Timeline } from 'primeng/timeline';
 import { Tooltip } from 'primeng/tooltip';
+import { AppCard } from '../../../../components/app-card/app-card';
 import { AuditEntry } from '../../data/matters';
 
 /** Zone 4 right — recent immutable audit trail as a PrimeNG timeline. */
 @Component({
     selector: 'app-audit-feed',
-    imports: [Timeline, Tag, RouterLink, Tooltip],
+    imports: [AppCard, Timeline, Tag, RouterLink, Tooltip],
     templateUrl: './audit-feed.html',
     host: { class: 'block' },
 })

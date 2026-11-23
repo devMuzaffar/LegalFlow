@@ -1,10 +1,5 @@
-<section class="rounded-border border border-surface bg-surface-0 p-4">
-  <header class="mb-2 flex items-center justify-between gap-2">
-    <h2 class="text-[11px] font-semibold uppercase tracking-wide text-muted-color">
-      Custodian risk breakdown
-    </h2>
-    <span class="text-[11px] text-muted-color">{{ custodians().length }} custodians</span>
-  </header>
+<app-card title="Custodian risk breakdown">
+  <span action class="text-xs text-muted-color">{{ custodians().length }} custodians</span>
 
   <p-table [value]="rows()" dataKey="id" [showGridlines]="false">
     <ng-template #header>
@@ -23,10 +18,10 @@
         <td class="font-medium text-surface-900">{{ c.name }}</td>
         <td class="text-right tabular-nums">{{ c.totalDocs | number }}</td>
         <td class="text-right">
-          <p-tag [value]="(c.piiCount | number) ?? ''" severity="warn" [rounded]="true" />
+          <p-tag [value]="(c.piiCount | number) ?? ''" severity="warn" />
         </td>
         <td class="text-right">
-          <p-tag [value]="(c.privilegeCount | number) ?? ''" severity="danger" [rounded]="true" />
+          <p-tag [value]="(c.privilegeCount | number) ?? ''" severity="danger" />
         </td>
         <td>
           <div class="flex items-center gap-2">
@@ -56,4 +51,4 @@
       </tr>
     </ng-template>
   </p-table>
-</section>
+</app-card>

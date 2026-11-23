@@ -1,8 +1,28 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
-import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
+import { routes } from './app.routes';
+
+/**
+ * Aura with p-card's radius aligned to `content.borderRadius` (6px), so cards
+ * match the `rounded-border` used by the dashboard widgets.
+ */
+const LegalFlowPreset = definePreset(Aura, {
+  components: {
+    card: {
+      root: {
+        borderRadius: '{border.radius.md}',
+      },
+    },
+    tag: {
+      root: {
+        borderRadius: '{border.radius.md}',
+      }
+    }
+  },
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,7 +31,7 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       ripple: true,
       theme: {
-        preset: Aura,
+        preset: LegalFlowPreset,
         options: {
           darkModeSelector: 'none',
         },

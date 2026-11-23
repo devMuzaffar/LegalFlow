@@ -1,22 +1,13 @@
-<section class="flex flex-col rounded-border border border-surface bg-surface-0 p-4">
-  <header class="mb-2 flex items-center justify-between gap-2">
-    <h2 class="text-[11px] font-semibold uppercase tracking-wide text-muted-color">
-      Recent audit feed
-    </h2>
-    <a routerLink="/audit-logs" class="text-[11px] font-medium text-primary hover:underline">
-      Audit logs →
-    </a>
-  </header>
+<app-card title="Recent audit feed">
+  <a action routerLink="/audit-logs" class="text-xs font-medium text-primary hover:underline">
+    Audit logs →
+  </a>
 
   <p-timeline [value]="events()" layout="vertical">
     <ng-template #content let-entry>
       <div class="flex flex-col gap-1 pb-2">
         <div class="flex flex-wrap items-center gap-2">
-          <p-tag
-            [value]="label(entry.action)"
-            [severity]="severity(entry.action)"
-            [rounded]="true"
-          />
+          <p-tag [value]="label(entry.action)" [severity]="severity(entry.action)" />
           <span class="text-[10px] text-muted-color">{{ ago(entry.minutesAgo) }}</span>
         </div>
 
@@ -36,4 +27,4 @@
       </div>
     </ng-template>
   </p-timeline>
-</section>
+</app-card>

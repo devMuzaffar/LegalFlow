@@ -1,13 +1,13 @@
 import { Component, computed, input } from '@angular/core';
-import { Card } from 'primeng/card';
 import { Tag } from 'primeng/tag';
+import { AppCard } from '../../../../components/app-card/app-card';
 
 const numberFormat = new Intl.NumberFormat('en-US');
 
 /** Zone 2c — AI pre-scan flag counts, each rendered as a severity tag. */
 @Component({
     selector: 'app-kpi-risk-flags',
-    imports: [Card, Tag],
+    imports: [AppCard, Tag],
     templateUrl: './kpi-risk-flags.html',
     host: { class: 'block h-full' },
 })

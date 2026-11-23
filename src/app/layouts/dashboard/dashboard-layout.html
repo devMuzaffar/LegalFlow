@@ -26,18 +26,22 @@
     <app-header />
 
     <!-- Body -->
+    <!-- Scroll container: the page grid AND the footer live inside it, so the
+         footer scrolls away with the content instead of staying pinned. -->
     <!-- Router-outlet renders as element so needs to disable, else it will be treated as div causing issues -->
     <!-- router-outlet is an anchor, bottom is where out actual page renders -->
     <!-- Router Outlet stays hidden while others as display:content -->
-    <main
-      class="flex-1 overflow-auto p-4 grid grid-cols-12 gap-4 content-start [&>router-outlet]:hidden [&>*:not(router-outlet)]:contents [:where(&)>*>*]:col-span-12"
-    >
-      <router-outlet />
-    </main>
+    <div class="min-h-0 flex-1 overflow-auto">
+      <main
+        class="p-4 grid grid-cols-12 gap-4 content-start [&>router-outlet]:hidden [&>*:not(router-outlet)]:contents [:where(&)>*>*]:col-span-12"
+      >
+        <router-outlet />
+      </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-surface px-4 py-3 text-xs text-muted-color">
-      <p>© {{ year }} LegalFlow. All rights reserved.</p>
-    </footer>
+      <!-- Footer (non-sticky) -->
+      <footer class="border-t border-surface px-4 py-3 text-xs text-muted-color">
+        <p>© {{ year }} LegalFlow. All rights reserved.</p>
+      </footer>
+    </div>
   </p-sidebar-main>
 </p-sidebar-layout>

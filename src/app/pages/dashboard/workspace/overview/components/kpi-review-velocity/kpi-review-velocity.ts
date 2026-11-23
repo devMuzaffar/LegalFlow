@@ -1,12 +1,12 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { Card } from 'primeng/card';
 import { ProgressBar } from 'primeng/progressbar';
+import { AppCard } from '../../../../components/app-card/app-card';
 
 /** Zone 2b — coding progress with a PrimeNG progress bar. */
 @Component({
     selector: 'app-kpi-review-velocity',
-    imports: [Card, ProgressBar, DecimalPipe],
+    imports: [AppCard, ProgressBar, DecimalPipe],
     templateUrl: './kpi-review-velocity.html',
     host: { class: 'block h-full' },
 })
