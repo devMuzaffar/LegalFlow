@@ -3,10 +3,15 @@ import { MeterGroup, MeterItem } from 'primeng/metergroup';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { FileType } from '../../data/matters';
 
-/** Palette for the stacked meter, in order. */
+// Constants
 const COLORS = ['var(--p-primary-color)', 'var(--p-sky-400)', 'var(--p-amber-400)'];
 
-/** Zone 5 — file type mix as a PrimeNG stacked meter. */
+/*
+   File Type Mix
+
+   File type distribution of the review-ready corpus as a stacked meter, with
+   no chart library involved.
+*/
 @Component({
     selector: 'app-file-type-mix',
     imports: [AppCard, MeterGroup],
@@ -14,12 +19,10 @@ const COLORS = ['var(--p-primary-color)', 'var(--p-sky-400)', 'var(--p-amber-400
     host: { class: 'block h-full' },
 })
 export class FileTypeMix {
+    // Vars
     readonly fileTypes = input.required<readonly FileType[]>();
 
-    /**
-     * MeterGroup renders `label` followed by its own percentage, so the label is
-     * just the type name — appending the pct here would print it twice.
-     */
+    // Derived
     readonly meters = computed<MeterItem[]>(() =>
         this.fileTypes().map((type, i) => ({
             label: type.label,

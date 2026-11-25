@@ -2,7 +2,11 @@ import { Component, input } from '@angular/core';
 import { Tag } from 'primeng/tag';
 import { AppCard } from '../../../../components/app-card/app-card';
 
-/** Zone 2d — bring-your-own-key vault and token usage. */
+/*
+   KPI Byok
+
+   Bring-your-own-key vault size, token usage and the per-document AI fee.
+*/
 @Component({
     selector: 'app-kpi-byok',
     imports: [AppCard, Tag],
@@ -10,8 +14,8 @@ import { AppCard } from '../../../../components/app-card/app-card';
     host: { class: 'block h-full' },
 })
 export class KpiByok {
+    // Vars
     readonly vaultGb = input.required<number>();
-    /** Tokens in millions, pre-formatted to one decimal. */
     readonly tokensM = input.required<string>();
     readonly perDocFee = input.required<number>();
 }

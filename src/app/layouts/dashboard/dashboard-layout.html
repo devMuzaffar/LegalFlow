@@ -26,12 +26,9 @@
     <app-header />
 
     <!-- Body -->
-    <!-- Scroll container: the page grid AND the footer live inside it, so the
-         footer scrolls away with the content instead of staying pinned. -->
-    <!-- Router-outlet renders as element so needs to disable, else it will be treated as div causing issues -->
-    <!-- router-outlet is an anchor, bottom is where out actual page renders -->
-    <!-- Router Outlet stays hidden while others as display:content -->
+    <!-- Scroll container: page grid + footer live here so the footer scrolls away -->
     <div class="min-h-0 flex-1 overflow-auto">
+      <!-- Grid: router-outlet hidden, page host dissolved, children span 12 by default -->
       <main
         class="p-4 grid grid-cols-12 gap-4 content-start [&>router-outlet]:hidden [&>*:not(router-outlet)]:contents [:where(&)>*>*]:col-span-12"
       >

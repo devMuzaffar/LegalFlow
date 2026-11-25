@@ -1,12 +1,4 @@
-<!--
-  ECA Command Center — /overview
-
-  Every direct child here is one grid item of the dashboard layout grid
-  (12 columns, default span 12). Each zone is a div carrying its own span,
-  wrapping a presentational component that receives plain values.
--->
-
-<!-- ── Page header (matter switcher lives in the action slot) ─────────────── -->
+<!-- Page Header -->
 <div class="col-span-12">
   <dashboard-page-header
     title="ECA Command Center"
@@ -25,12 +17,12 @@
   </dashboard-page-header>
 </div>
 
-<!-- ── Zone 1: Matter context strip ───────────────────────────────────────── -->
+<!-- Matter Context -->
 <div class="col-span-12">
   <app-matter-context-strip [matter]="matter()" />
 </div>
 
-<!-- ── Zone 2: KPI cards (1 → 2 → 4 across) ───────────────────────────────── -->
+<!-- KPI Cards -->
 <div class="col-span-12 sm:col-span-6 lg:col-span-3">
   <app-kpi-ingestion
     [uploaded]="matter().uploaded"
@@ -63,7 +55,7 @@
   />
 </div>
 
-<!-- ── Zone 3: Automated processing pipeline ──────────────────────────────── -->
+<!-- Processing Pipeline -->
 <div class="col-span-12">
   <app-pipeline-strip [steps]="matter().pipeline" />
 </div>
@@ -77,7 +69,7 @@
   <app-audit-feed [entries]="matter().audit" />
 </div>
 
-<!-- ── Zone 5: File type mix ──────────────────────────────────────────────── -->
+<!-- File Type Mix -->
 <div class="col-span-12">
   <app-file-type-mix [fileTypes]="matter().fileTypes" />
 </div>

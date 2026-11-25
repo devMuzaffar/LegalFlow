@@ -4,6 +4,12 @@ import { SidebarModule } from 'primeng/sidebar';
 import { Header } from './header/header';
 import { DashboardSidebar } from './sidebar/sidebar';
 
+/*
+   Dashboard Layout
+
+   Authenticated shell. Owns the sidebar open/collapse state and the scrollable
+   12-column page grid; header and footer sit outside that grid.
+*/
 @Component({
   selector: 'app-dashboard-layout',
   imports: [RouterOutlet, SidebarModule, Header, DashboardSidebar],

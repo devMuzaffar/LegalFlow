@@ -8,7 +8,12 @@ import { Tag } from 'primeng/tag';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { Custodian } from '../../data/matters';
 
-/** Zone 4 left — per-custodian document and risk counts. */
+/*
+   Custodian Risk
+
+   Per-custodian document and risk counts with a review progress column. The
+   inspect action routes to the review queue filtered by custodian.
+*/
 @Component({
     selector: 'app-custodian-risk',
     imports: [AppCard, TableModule, Tag, RouterLink, ButtonDirective, DecimalPipe, ProgressBar],
@@ -16,11 +21,13 @@ import { Custodian } from '../../data/matters';
     host: { class: 'block' },
 })
 export class CustodianRisk {
+    // Vars
     readonly custodians = input.required<readonly Custodian[]>();
 
-    /** p-table's [value] is typed as a mutable array. */
+    // Derived
     readonly rows = computed(() => [...this.custodians()]);
 
+    // Helpers
     reviewPct(c: Custodian): number {
         return c.totalDocs ? Math.round((c.reviewed / c.totalDocs) * 100) : 0;
     }

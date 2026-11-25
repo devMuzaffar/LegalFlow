@@ -6,6 +6,12 @@ import { AvatarModule } from 'primeng/avatar';
 import { SidebarModule } from 'primeng/sidebar';
 import { NAV_GROUPS } from '../menu-list';
 
+/*
+   Dashboard Sidebar
+
+   Navigation panel. Renders header, groups, items and footer from `NAV_GROUPS`;
+   active state comes from `routerLinkActive`, not the data.
+*/
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.html',
@@ -17,5 +23,6 @@ import { NAV_GROUPS } from '../menu-list';
   `,
 })
 export class DashboardSidebar {
+  // Vars
   protected readonly navGroups = NAV_GROUPS;
 }

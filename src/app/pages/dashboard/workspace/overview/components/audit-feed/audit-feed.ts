@@ -6,7 +6,12 @@ import { Tooltip } from 'primeng/tooltip';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { AuditEntry } from '../../data/matters';
 
-/** Zone 4 right — recent immutable audit trail as a PrimeNG timeline. */
+/*
+   Audit Feed
+
+   Recent immutable audit trail rendered as a vertical timeline. Shows the
+   action, actor role, document ID and a truncated SHA-256 hash.
+*/
 @Component({
     selector: 'app-audit-feed',
     imports: [AppCard, Timeline, Tag, RouterLink, Tooltip],
@@ -14,12 +19,13 @@ import { AuditEntry } from '../../data/matters';
     host: { class: 'block' },
 })
 export class AuditFeed {
+    // Vars
     readonly entries = input.required<readonly AuditEntry[]>();
 
-    /** p-timeline's [value] is typed as a mutable array. */
+    // Derived
     readonly events = computed(() => [...this.entries()]);
 
-    /** Truncated SHA-256: first 10 + last 4 hex chars. */
+    // Helpers
     shortHash(sha256: string): string {
         return `${sha256.slice(0, 10)}…${sha256.slice(-4)}`;
     }

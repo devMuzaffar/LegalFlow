@@ -1,3 +1,10 @@
+/*
+   Menu List
+
+   Sidebar navigation model: icons, labels, routes and badges grouped into
+   sections. Active state is resolved at render time by `routerLinkActive`.
+*/
+
 // Types
 export interface NavItem {
     icon: string;

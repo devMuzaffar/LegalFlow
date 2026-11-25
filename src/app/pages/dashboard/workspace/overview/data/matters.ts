@@ -1,8 +1,12 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// Types + seed data for the ECA Overview.
-// Numbers are internally consistent: custodian docs sum to reviewReady and the
-// custodian PII / privilege sums match the AI risk flag totals.
-// ─────────────────────────────────────────────────────────────────────────────
+/*
+   Matters
+
+   Types and seed data for the ECA Overview. Numbers are internally consistent:
+   custodian docs sum to reviewReady and the custodian PII / privilege sums
+   match the AI risk flag totals.
+*/
+
+// Types
 
 export type AuditAction = 'AI_DECISION_REVERSED' | 'PRIVILEGE_CODED' | 'LEGAL_HOLD_ISSUED';
 
@@ -56,6 +60,7 @@ export interface Matter {
     audit: readonly AuditEntry[];
 }
 
+// Matters
 const FINCORP: Matter = {
     id: 'MTR-2026-01',
     name: 'FinCorp Data Breach',

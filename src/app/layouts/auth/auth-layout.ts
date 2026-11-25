@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+/*
+   Auth Layout
+
+   Split layout for unauthenticated screens: brand panel on the left, routed
+   form on the right. The brand panel hides below `lg`.
+*/
 @Component({
   selector: 'app-auth-layout',
   imports: [RouterOutlet],
@@ -8,6 +14,6 @@ import { RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLayout {
-  /** Used in the footer note of the brand panel. */
+  // Vars
   protected readonly year = new Date().getFullYear();
 }

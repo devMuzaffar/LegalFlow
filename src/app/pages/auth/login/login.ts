@@ -17,6 +17,12 @@ export interface DemoRole {
   description: string;
 }
 
+/*
+   Login
+
+   Login screen: credentials form plus one-tap demo role buttons under the
+   "OR TRY DEMO" divider.
+*/
 @Component({
   selector: 'app-login',
   imports: [
@@ -33,13 +39,13 @@ export interface DemoRole {
   templateUrl: './login.html',
 })
 export class Login {
+  // Vars
   private readonly router = inject(Router);
 
   email = '';
   password = '';
   isPasswordMasked = true;
 
-  /** One-tap demo sign-in options shown under the "OR TRY DEMO" divider. */
   readonly demoRoles: DemoRole[] = [
     { id: 'matter-admin', label: 'Matter Admin', description: 'Full workspace access' },
     { id: 'lead-reviewer', label: 'Lead Reviewer', description: 'Document review and coding' },

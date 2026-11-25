@@ -6,7 +6,12 @@ import { Tooltip } from 'primeng/tooltip';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { PipelineStep } from '../../data/matters';
 
-/** Zone 3 — automated processing pipeline as a 5-step tracker. */
+/*
+   Pipeline Strip
+
+   Automated processing pipeline as a five-step tracker. Each step carries a
+   hover stat and its own progress bar.
+*/
 @Component({
     selector: 'app-pipeline-strip',
     imports: [AppCard, RouterLink, ProgressBar, Tag, Tooltip],
@@ -14,9 +19,10 @@ import { PipelineStep } from '../../data/matters';
     host: { class: 'block h-full' },
 })
 export class PipelineStrip {
+    // Vars
     readonly steps = input.required<readonly PipelineStep[]>();
 
-    /** Steps that reached 100%. */
+    // Derived
     readonly done = computed(() => this.steps().filter((s) => s.progress === 100).length);
 
     /** Mean progress across all steps. */

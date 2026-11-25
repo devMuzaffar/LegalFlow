@@ -1,3 +1,7 @@
+/*
+   Workspace Routes
+*/
+
 import { Routes } from '@angular/router';
 
 /** Workspace module routes. Paths are flat so sidebar links can stay short. */
