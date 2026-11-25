@@ -1,0 +1,72 @@
+<div class="flex flex-col gap-2">
+  <!-- Search -->
+  <div class="rounded-lg border border-surface bg-surface-0 p-2">
+    <div class="flex items-center gap-2">
+      <p-iconfield class="flex-1">
+        <p-inputicon class="pi pi-search" />
+        <input
+          pInputText
+          class="w-full"
+          [value]="query()"
+          (input)="onInput($event)"
+          placeholder='Search documents — try "breach AND account"'
+          aria-label="Search documents"
+        />
+      </p-iconfield>
+
+      <p-tag
+        class="shrink-0"
+        [value]="'Sample Queue · ' + sampleSize() + ' of ' + corpusSize()"
+        severity="secondary"
+        [rounded]="true"
+      />
+    </div>
+  </div>
+
+  <!-- Mode + filters -->
+  <p-card [pt]="{ body: { class: 'p-2!' } }">
+    <div class="flex flex-wrap items-center gap-2">
+      <p-selectbutton
+        [options]="modeOptions"
+        optionLabel="label"
+        optionValue="value"
+        [ngModel]="mode()"
+        (ngModelChange)="onModeChange($event)"
+        [allowEmpty]="false"
+        size="small"
+      />
+
+      <p-selectbutton
+        [options]="filterOptions"
+        optionLabel="label"
+        optionValue="value"
+        [ngModel]="filter()"
+        (ngModelChange)="onFilterChange($event)"
+        [allowEmpty]="false"
+        size="small"
+      />
+
+      @if (custodianName(); as name) {
+        <span
+          class="inline-flex items-center gap-1 rounded-full bg-primary-50 py-0.5 pl-2.5 pr-1 text-xs font-medium text-primary"
+        >
+          <i class="pi pi-user text-[11px]"></i>
+          {{ name }}
+          <button
+            pButton
+            type="button"
+            [text]="true"
+            [rounded]="true"
+            size="small"
+            severity="secondary"
+            class="h-5! w-5! p-0!"
+            (click)="clearCustodian.emit()"
+            aria-label="Clear custodian filter"
+          >
+            <i class="pi pi-times text-[11px]"></i>
+          </button>
+        </span>
+      }
+    </div>
+  </p-card>
+</div>

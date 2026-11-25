@@ -1,0 +1,65 @@
+<!-- Page Header -->
+<div>
+  <dashboard-page-header
+    title="Review & Search Workspace"
+    subtitle="Coding, AI reversals and the evidence thread reader."
+  />
+</div>
+
+<!-- Toolbar -->
+<div>
+  <app-review-toolbar
+    [query]="filters().query"
+    [mode]="filters().mode"
+    [filter]="filters().filter"
+    [custodianName]="custodianName()"
+    [sampleSize]="filteredDocuments().length"
+    (queryChange)="onQueryChange($event)"
+    (modeChange)="onModeChange($event)"
+    (filterChange)="onFilterChange($event)"
+    (clearCustodian)="onClearCustodian()"
+  />
+</div>
+
+<!-- Three-pane workspace -->
+<div>
+  <p-splitter
+    [panelSizes]="[28, 47, 25]"
+    [minSizes]="[20, 35, 20]"
+    [style]="{ height: 'calc(100vh - 22rem)' }"
+    class="min-h-[28rem] overflow-hidden rounded-border border border-surface"
+  >
+    <p-splitter-panel>
+      <app-document-list-pane
+        [documents]="pagedDocuments()"
+        [selectedId]="selectedDocId()"
+        [first]="first()"
+        [total]="filteredDocuments().length"
+        [rows]="pageSize"
+        (select)="onSelect($event)"
+        (pageChange)="onPageChange($event)"
+        (resetFilters)="onResetFilters()"
+      />
+    </p-splitter-panel>
+
+    <p-splitter-panel>
+      <app-evidence-reader-pane
+        [document]="selectedDocument()"
+        [showRedactions]="showRedactions()"
+        (redactionChange)="onRedactionChange($event)"
+        (prev)="onStep(-1)"
+        (next)="onStep(1)"
+      />
+    </p-splitter-panel>
+
+    <p-splitter-panel>
+      <app-review-inspector-pane
+        [document]="selectedDocument()"
+        [role]="role()"
+        (confirm)="onConfirm($event)"
+        (reverse)="onReverse($event)"
+        (saveCoding)="onSaveCoding($event)"
+      />
+    </p-splitter-panel>
+  </p-splitter>
+</div>

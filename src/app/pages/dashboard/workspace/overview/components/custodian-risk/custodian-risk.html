@@ -42,11 +42,12 @@
             size="small"
             [text]="true"
             severity="secondary"
-            icon="pi pi-search"
             routerLink="/document-review"
             [queryParams]="{ custodian: c.id }"
             aria-label="Inspect custodian"
-          ></a>
+          >
+            <i class="pi pi-search text-xs"></i>
+          </a>
         </td>
       </tr>
     </ng-template>

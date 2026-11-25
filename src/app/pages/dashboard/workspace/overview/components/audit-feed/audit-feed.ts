@@ -41,8 +41,14 @@ export class AuditFeed {
         switch (action) {
             case 'AI_DECISION_REVERSED':
                 return 'AI reversed';
+            case 'AI_REVERSED':
+                return 'Reviewer reversed';
+            case 'AI_CONFIRMED':
+                return 'AI confirmed';
             case 'PRIVILEGE_CODED':
                 return 'Privilege coded';
+            case 'CODING_SAVED':
+                return 'Coding saved';
             case 'LEGAL_HOLD_ISSUED':
                 return 'Legal hold issued';
         }
@@ -51,7 +57,12 @@ export class AuditFeed {
     severity(action: AuditEntry['action']): 'danger' | 'info' | 'warn' {
         switch (action) {
             case 'AI_DECISION_REVERSED':
+            case 'AI_REVERSED':
                 return 'danger';
+            case 'AI_CONFIRMED':
+                return 'info';
+            case 'CODING_SAVED':
+                return 'info';
             case 'PRIVILEGE_CODED':
                 return 'info';
             case 'LEGAL_HOLD_ISSUED':

@@ -8,7 +8,13 @@
 
 // Types
 
-export type AuditAction = 'AI_DECISION_REVERSED' | 'PRIVILEGE_CODED' | 'LEGAL_HOLD_ISSUED';
+export type AuditAction =
+    | 'AI_DECISION_REVERSED'
+    | 'PRIVILEGE_CODED'
+    | 'LEGAL_HOLD_ISSUED'
+    | 'AI_CONFIRMED'
+    | 'AI_REVERSED'
+    | 'CODING_SAVED';
 
 export interface PipelineStep {
     label: string;

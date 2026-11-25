@@ -1,0 +1,185 @@
+@if (document(); as doc) {
+  <div class="flex min-h-0 flex-1 flex-col">
+    <p-tabs [(value)]="activeTab" class="flex min-h-0 flex-1 flex-col">
+      <p-tabpanels class="min-h-0 flex-1 overflow-auto p-2!">
+        <!-- AI Findings -->
+        <p-tabpanel value="findings">
+          <div class="flex flex-col gap-2">
+            @if (findings().length) {
+              @for (finding of findings(); track finding.id) {
+                <article class="rounded-lg bg-surface-50 p-2.5">
+                  <!-- Header -->
+                  <div class="flex flex-wrap items-center justify-between gap-1">
+                    <div class="flex items-center gap-1">
+                      <p-tag
+                        [value]="finding.type"
+                        [severity]="typeSeverity(finding.type)"
+                        [rounded]="true"
+                      />
+                      <p-tag
+                        [value]="finding.status.toLowerCase()"
+                        [severity]="statusSeverity(finding.status)"
+                        [rounded]="true"
+                      />
+                    </div>
+                    <span class="text-xs font-medium text-muted-color"
+                      >{{ finding.confidence }}%</span
+                    >
+                  </div>
+
+                  <!-- Quoted snippet -->
+                  <p
+                    class="mt-1.5 rounded-sm bg-surface-0 px-1.5 py-1 font-mono text-xs leading-5 text-surface-900"
+                  >
+                    “{{ snippet(finding) }}”
+                  </p>
+
+                  <!-- Saved reason -->
+                  @if (finding.decisionReason) {
+                    <p class="mt-1.5 text-xs text-muted-color">
+                      <span class="font-semibold">Reason:</span> {{ finding.decisionReason }}
+                    </p>
+                  }
+
+                  <!-- Actions -->
+                  @if (finding.status === 'PENDING') {
+                    @if (reversingId() === finding.id) {
+                      <div class="mt-2 flex flex-col gap-1.5">
+                        <textarea
+                          pTextarea
+                          rows="2"
+                          class="w-full text-xs"
+                          [ngModel]="reason()"
+                          (ngModelChange)="reason.set($event)"
+                          placeholder="Required: why is the AI call wrong?"
+                          aria-label="Reversal reason"
+                        ></textarea>
+                        <div class="flex items-center gap-1">
+                          <button
+                            pButton
+                            type="button"
+                            size="small"
+                            severity="danger"
+                            [disabled]="!canSubmitReversal()"
+                            (click)="submitReversal()"
+                          >
+                            Submit Reversal
+                          </button>
+                          <button
+                            pButton
+                            type="button"
+                            size="small"
+                            severity="secondary"
+                            [text]="true"
+                            (click)="cancelReversal()"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    } @else {
+                      <div class="mt-2 flex items-center gap-1">
+                        <button
+                          pButton
+                          type="button"
+                          size="small"
+                          severity="success"
+                          [outlined]="true"
+                          (click)="confirm.emit(finding.id)"
+                        >
+                          <i class="pi pi-check"></i>
+                          Confirm
+                        </button>
+                        <button
+                          pButton
+                          type="button"
+                          size="small"
+                          severity="danger"
+                          [outlined]="true"
+                          (click)="startReversal(finding.id)"
+                        >
+                          <i class="pi pi-undo"></i>
+                          Reverse
+                        </button>
+                      </div>
+                    }
+                  }
+                </article>
+              }
+            } @else {
+              <p class="text-xs text-muted-color">No AI findings on this document.</p>
+            }
+          </div>
+        </p-tabpanel>
+
+        <!-- Legal Coding -->
+        <p-tabpanel value="coding">
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
+              <label for="responsiveness" class="text-xs font-medium text-surface-900">
+                Responsiveness
+              </label>
+              <p-select
+                inputId="responsiveness"
+                [options]="responsivenessOptions"
+                optionLabel="label"
+                optionValue="value"
+                [ngModel]="responsiveness()"
+                (ngModelChange)="responsiveness.set($event)"
+                appendTo="body"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label for="privilege" class="text-xs font-medium text-surface-900">Privilege</label>
+              <p-select
+                inputId="privilege"
+                [options]="privilegeOptions"
+                optionLabel="label"
+                optionValue="value"
+                [ngModel]="privilege()"
+                (ngModelChange)="privilege.set($event)"
+                appendTo="body"
+              />
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <label for="notes" class="text-xs font-medium text-surface-900">Reviewer Notes</label>
+              <textarea
+                pTextarea
+                id="notes"
+                rows="3"
+                class="w-full text-xs"
+                [ngModel]="notes()"
+                (ngModelChange)="notes.set($event)"
+                placeholder="Optional context for the matter team"
+              ></textarea>
+            </div>
+
+            <button pButton type="button" size="small" [disabled]="!canSave()" (click)="onSave()">
+              <i class="pi pi-save"></i>
+              Save Coding
+            </button>
+
+            @if (isAuditor()) {
+              <p class="text-xs text-muted-color">Read-only role — coding is disabled.</p>
+            }
+          </div>
+        </p-tabpanel>
+      </p-tabpanels>
+
+      <!-- Tab strip -->
+      <div class="mt-2 shrink-0 border-t border-surface pt-2">
+        <p-tablist>
+          <p-tab value="findings">Findings ({{ findings().length }})</p-tab>
+          <p-tab value="coding">Coding</p-tab>
+        </p-tablist>
+      </div>
+    </p-tabs>
+  </div>
+} @else {
+  <div class="flex flex-1 flex-col items-center justify-center gap-2 p-6 text-center">
+    <i class="pi pi-sliders-h text-2xl text-muted-color"></i>
+    <p class="text-xs text-muted-color">No document selected.</p>
+  </div>
+}

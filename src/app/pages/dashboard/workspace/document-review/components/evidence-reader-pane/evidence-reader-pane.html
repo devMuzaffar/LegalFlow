@@ -1,0 +1,117 @@
+@if (document(); as doc) {
+  <div class="flex min-h-0 flex-1 flex-col">
+    <!-- Metadata bar -->
+    <header class="shrink-0 border-b border-surface pb-2">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-1.5 text-xs">
+          <span class="font-mono font-semibold text-surface-900">{{ doc.id }}</span>
+          <span class="text-muted-color">·</span>
+          <span class="text-muted-color">{{ doc.custodianName }}</span>
+          <span class="text-muted-color">·</span>
+          <span class="text-muted-color">{{ doc.receivedAt | date: 'dd MMM yyyy, HH:mm' }}</span>
+          <span class="text-muted-color">·</span>
+          <span
+            class="cursor-help font-mono text-muted-color"
+            [pTooltip]="doc.checksum"
+            tooltipPosition="bottom"
+            [showDelay]="200"
+          >
+            SHA-256 {{ shortHash(doc.checksum) }}
+          </span>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <button
+            pButton
+            type="button"
+            size="small"
+            severity="secondary"
+            [text]="true"
+            [iconOnly]="true"
+            (click)="prev.emit()"
+            pTooltip="Previous (K)"
+            tooltipPosition="bottom"
+            aria-label="Previous document"
+          >
+            <i class="pi pi-angle-left"></i>
+          </button>
+          <button
+            pButton
+            type="button"
+            size="small"
+            severity="secondary"
+            [text]="true"
+            [iconOnly]="true"
+            (click)="next.emit()"
+            pTooltip="Next (J)"
+            tooltipPosition="bottom"
+            aria-label="Next document"
+          >
+            <i class="pi pi-angle-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-2 flex items-center gap-2">
+        <p-toggleswitch
+          [ngModel]="showRedactions()"
+          (ngModelChange)="redactionChange.emit($event)"
+          inputId="redaction-preview"
+        />
+        <label for="redaction-preview" class="text-xs font-medium text-surface-900">
+          Redaction Preview
+        </label>
+        <span class="text-[11px] text-muted-color">Visual preview only — non-destructive</span>
+      </div>
+    </header>
+
+    <!-- Thread body -->
+    <div class="min-h-0 flex-1 overflow-auto pr-1 pt-2">
+      <ul class="flex flex-col gap-1.5">
+        @for (thread of threads(); track thread.message.id) {
+          <li class="rounded-lg border border-surface bg-surface-0 p-2.5">
+            <!-- Message header -->
+            <div class="flex items-center justify-between gap-1 text-xs">
+              <span class="font-semibold text-surface-900">{{ thread.message.sender }}</span>
+              <span class="text-muted-color">
+                {{ thread.message.sentAt | date: 'dd MMM, HH:mm' }}
+              </span>
+            </div>
+            <p class="mt-0.5 truncate text-[11px] text-muted-color">
+              To: {{ thread.message.recipients.join(', ') }}
+            </p>
+
+            <!-- Highlighted body -->
+            <p
+              class="mt-1.5 whitespace-pre-wrap break-words text-[13px] leading-6 text-surface-900"
+            >
+              @for (segment of thread.segments; track $index) {
+                @if (segment.finding; as finding) {
+                  @if (isRedacted(finding)) {
+                    <span
+                      class="select-none rounded-sm bg-slate-900 px-1 text-slate-900"
+                      [pTooltip]="'[REDACTED: ' + finding.type + ']'"
+                      tooltipPosition="top"
+                      [showDelay]="150"
+                      >[REDACTED: {{ finding.type }}]</span
+                    >
+                  } @else {
+                    <mark [class]="markClass(finding)">{{ segment.text }}</mark>
+                  }
+                } @else {
+                  {{ segment.text }}
+                }
+              }
+            </p>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+} @else {
+  <!-- Empty state -->
+  <div class="flex flex-1 flex-col items-center justify-center gap-2 p-6 text-center">
+    <i class="pi pi-file-edit text-2xl text-muted-color"></i>
+    <p class="text-xs text-muted-color">Select a document to read its evidence.</p>
+  </div>
+}

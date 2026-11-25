@@ -1,0 +1,99 @@
+<div class="flex min-h-0 flex-1 flex-col">
+  @if (documents().length) {
+    <!-- Cards -->
+    <div class="flex-1 overflow-auto pr-1">
+      <ul class="flex flex-col gap-1.5">
+        @for (doc of documents(); track doc.id) {
+          <li>
+            <button
+              type="button"
+              class="w-full rounded-lg border border-l-4 p-2.5 text-left transition-colors"
+              [class]="
+                doc.id === selectedId()
+                  ? 'border-emerald-200 border-l-emerald-500 bg-emerald-50'
+                  : 'border-surface border-l-transparent bg-surface-0 hover:bg-surface-50'
+              "
+              (click)="select.emit(doc.id)"
+            >
+              <!-- Row 1: id + source + status -->
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-mono text-xs font-semibold text-surface-900">{{ doc.id }}</span>
+                <div class="flex items-center gap-1">
+                  <span
+                    class="size-2 rounded-full"
+                    [class]="isCoded(doc) ? 'bg-emerald-500' : 'bg-surface-300'"
+                    [attr.title]="isCoded(doc) ? 'Coded' : 'Unreviewed'"
+                  ></span>
+                  <p-tag
+                    [value]="doc.sourceType"
+                    [severity]="sourceSeverity(doc.sourceType)"
+                    [rounded]="true"
+                  />
+                </div>
+              </div>
+
+              <!-- Row 2: subject -->
+              <p class="mt-1 line-clamp-2 text-[13px] font-medium leading-5 text-surface-900">
+                {{ doc.subject }}
+              </p>
+
+              <!-- Row 3: custodian + date + risk -->
+              <div class="mt-1.5 flex items-center justify-between gap-2 text-xs text-muted-color">
+                <span class="truncate">{{ doc.custodianName }}</span>
+                <span class="shrink-0">{{ doc.receivedAt | date: 'dd MMM' }}</span>
+              </div>
+
+              <div class="mt-1 flex flex-wrap items-center gap-1">
+                <span
+                  class="rounded-full bg-surface-100 px-1.5 py-0.5 text-[11px] text-muted-color"
+                >
+                  {{ doc.threadCount }} msg
+                </span>
+
+                @for (type of riskTypes(doc); track type) {
+                  <span
+                    class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold"
+                    [class]="
+                      type === 'PRIVILEGE'
+                        ? 'bg-amber-100 text-amber-900'
+                        : 'bg-rose-100 text-rose-800'
+                    "
+                  >
+                    {{ type }}
+                  </span>
+                }
+              </div>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Paginator -->
+    <div class="shrink-0 border-t border-surface pt-1">
+      <p-paginator
+        [rows]="rows()"
+        [first]="first()"
+        [totalRecords]="total()"
+        [showPageLinks]="true"
+        (onPageChange)="onPage($event)"
+      />
+    </div>
+  } @else {
+    <!-- Empty state -->
+    <div class="flex flex-1 flex-col items-center justify-center gap-3 p-6 text-center">
+      <i class="pi pi-filter-slash text-2xl text-muted-color"></i>
+      <p class="text-xs text-muted-color">No documents match the current filters.</p>
+      <button
+        pButton
+        type="button"
+        size="small"
+        severity="secondary"
+        [outlined]="true"
+        (click)="resetFilters.emit()"
+      >
+        Reset Filters
+      </button>
+    </div>
+  }
+</div>

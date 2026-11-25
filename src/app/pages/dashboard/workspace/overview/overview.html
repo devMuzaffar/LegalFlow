@@ -1,5 +1,5 @@
 <!-- Page Header -->
-<div class="col-span-12">
+<div>
   <dashboard-page-header
     title="ECA Command Center"
     subtitle="Ingestion, review and governance at a glance."
@@ -18,12 +18,12 @@
 </div>
 
 <!-- Matter Context -->
-<div class="col-span-12">
+<div>
   <app-matter-context-strip [matter]="matter()" />
 </div>
 
 <!-- KPI Cards -->
-<div class="col-span-12 sm:col-span-6 lg:col-span-3">
+<div class="sm:col-span-6 lg:col-span-3">
   <app-kpi-ingestion
     [uploaded]="matter().uploaded"
     [reviewReady]="matter().reviewReady"
@@ -31,7 +31,7 @@
   />
 </div>
 
-<div class="col-span-12 sm:col-span-6 lg:col-span-3">
+<div class="sm:col-span-6 lg:col-span-3">
   <app-kpi-review-velocity
     [codedPct]="codedPct()"
     [coded]="matter().coded"
@@ -39,15 +39,15 @@
   />
 </div>
 
-<div class="col-span-12 sm:col-span-6 lg:col-span-3">
+<div class="sm:col-span-6 lg:col-span-3">
   <app-kpi-risk-flags
     [privilege]="matter().privilegeFlags"
     [pii]="matter().piiFlags"
-    [reversed]="matter().humanReversed"
+    [reversed]="humanReversed()"
   />
 </div>
 
-<div class="col-span-12 sm:col-span-6 lg:col-span-3">
+<div class="sm:col-span-6 lg:col-span-3">
   <app-kpi-byok
     [vaultGb]="matter().vaultGb"
     [tokensM]="tokensM()"
@@ -56,20 +56,20 @@
 </div>
 
 <!-- Processing Pipeline -->
-<div class="col-span-12">
+<div>
   <app-pipeline-strip [steps]="matter().pipeline" />
 </div>
 
 <!-- ── Zone 4: 60 / 40 action split─────────────────────────── -->
-<div class="col-span-12 lg:col-span-8">
+<div class="lg:col-span-8">
   <app-custodian-risk [custodians]="matter().custodians" />
 </div>
 
-<div class="col-span-12 lg:col-span-4">
-  <app-audit-feed [entries]="matter().audit" />
+<div class="lg:col-span-4">
+  <app-audit-feed [entries]="auditEntries()" />
 </div>
 
 <!-- File Type Mix -->
-<div class="col-span-12">
+<div>
   <app-file-type-mix [fileTypes]="matter().fileTypes" />
 </div>
