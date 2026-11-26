@@ -1,4 +1,4 @@
-import { Component, computed, inject, linkedSignal } from '@angular/core';
+import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from 'primeng/card';
@@ -63,7 +63,7 @@ export class DocumentReview {
     private readonly router = inject(Router);
     private readonly store = inject(ReviewStore);
 
-    readonly pageSize = PAGE_SIZE;
+    readonly pageSize = signal(PAGE_SIZE);
     readonly role = this.store.activeRole;
 
     private readonly params = toSignal(this.route.queryParamMap, { requireSync: true });
@@ -152,13 +152,14 @@ export class DocumentReview {
     /** Deep links land on the right page; filter changes drop back to page one. */
     readonly first = linkedSignal(() => {
         const docs = this.filteredDocuments();
+        const rows = this.pageSize();
         const index = docs.findIndex((doc) => doc.id === this.selectedDocId());
 
-        return index >= 0 ? Math.floor(index / PAGE_SIZE) * PAGE_SIZE : 0;
+        return index >= 0 ? Math.floor(index / rows) * rows : 0;
     });
 
     readonly pagedDocuments = computed(() =>
-        this.filteredDocuments().slice(this.first(), this.first() + PAGE_SIZE),
+        this.filteredDocuments().slice(this.first(), this.first() + this.pageSize()),
     );
 
     readonly selectedDocument = computed(
@@ -202,11 +203,16 @@ export class DocumentReview {
         this.syncUrl({ docId });
     }
 
-    onPageChange(first: number): void {
-        this.first.set(first);
+    onPageChange(event: { first: number; rows: number }): void {
+        if (event.rows !== this.pageSize()) {
+            this.pageSize.set(event.rows);
+            return;
+        }
+
+        this.first.set(event.first);
 
         const docs = this.filteredDocuments();
-        const target = docs[first] ?? docs[0];
+        const target = docs[event.first] ?? docs[0];
 
         if (target) {
             this.syncUrl({ docId: target.id });

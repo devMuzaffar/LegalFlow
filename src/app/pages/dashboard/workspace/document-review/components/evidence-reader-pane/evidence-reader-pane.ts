@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Avatar } from 'primeng/avatar';
 import { ButtonDirective } from 'primeng/button';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { Tooltip } from 'primeng/tooltip';
@@ -15,7 +16,7 @@ import { buildSegments } from '../../utils/text-segments';
 */
 @Component({
     selector: 'app-evidence-reader-pane',
-    imports: [FormsModule, DatePipe, ButtonDirective, ToggleSwitch, Tooltip],
+    imports: [FormsModule, DatePipe, Avatar, ButtonDirective, ToggleSwitch, Tooltip],
     templateUrl: './evidence-reader-pane.html',
     host: { class: 'flex h-full min-h-0 flex-col' },
 })
@@ -43,6 +44,20 @@ export class EvidenceReaderPane {
     });
 
     // Helpers
+    initials(name: string): string {
+        const parts = name.trim().split(/\s+/).filter(Boolean);
+
+        if (parts.length === 0) {
+            return '?';
+        }
+
+        if (parts.length === 1) {
+            return parts[0].slice(0, 2).toUpperCase();
+        }
+
+        return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+    }
+
     shortHash(value: string): string {
         return `${value.slice(0, 10)}…${value.slice(-4)}`;
     }

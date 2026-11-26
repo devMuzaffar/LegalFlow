@@ -45,7 +45,7 @@
           [selectedId]="selectedDocId()"
           [first]="first()"
           [total]="filteredDocuments().length"
-          [rows]="pageSize"
+          [rows]="pageSize()"
           (select)="onSelect($event)"
           (pageChange)="onPageChange($event)"
           (resetFilters)="onResetFilters()"
