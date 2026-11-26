@@ -27,16 +27,18 @@
 
     <!-- Body -->
     <!-- Scroll container: page grid + footer live here so the footer scrolls away -->
-    <div class="min-h-0 flex-1 overflow-auto">
+    <div class="flex min-h-0 flex-1 flex-col overflow-auto">
       <!-- Grid: router-outlet hidden, page host dissolved, children span 12 by default -->
       <main
-        class="p-4 grid grid-cols-12 gap-4 content-start [&>router-outlet]:hidden [&>*:not(router-outlet)]:contents [:where(&)>*>*]:col-span-12"
+        class="p-4 flex-1 grid grid-cols-12 gap-4 content-start [&>router-outlet]:hidden [&>*:not(router-outlet)]:contents [:where(&)>*>*]:col-span-12"
       >
         <router-outlet />
       </main>
 
-      <!-- Footer (non-sticky) -->
-      <footer class="border-t border-surface px-4 py-3 text-xs text-muted-color">
+      <!-- Footer (non-sticky, fixed 40px, pinned to the viewport while the page is short) -->
+      <footer
+        class="flex h-10 shrink-0 items-center border-t border-surface px-4 text-xs text-muted-color"
+      >
         <p>© {{ year }} LegalFlow. All rights reserved.</p>
       </footer>
     </div>
