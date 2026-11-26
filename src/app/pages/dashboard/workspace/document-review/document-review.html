@@ -13,7 +13,6 @@
     [mode]="filters().mode"
     [filter]="filters().filter"
     [custodianName]="custodianName()"
-    [sampleSize]="filteredDocuments().length"
     (queryChange)="onQueryChange($event)"
     (modeChange)="onModeChange($event)"
     (filterChange)="onFilterChange($event)"
@@ -21,45 +20,58 @@
   />
 </div>
 
+<!-- Queue Scope -->
+<div class="flex items-center justify-between gap-2">
+  <h2 class="font-medium">Documents</h2>
+  <p-tag
+    [value]="'Sample Queue · ' + filteredDocuments().length + ' of ' + corpusSize()"
+    severity="info"
+  />
+</div>
+
 <!-- Three-pane workspace -->
 <div>
-  <p-splitter
-    [panelSizes]="[28, 47, 25]"
-    [minSizes]="[20, 35, 20]"
-    [style]="{ height: 'calc(100vh - 22rem)' }"
-    class="min-h-[24rem] overflow-hidden rounded-border border border-surface"
-  >
-    <p-splitter-panel>
-      <app-document-list-pane
-        [documents]="pagedDocuments()"
-        [selectedId]="selectedDocId()"
-        [first]="first()"
-        [total]="filteredDocuments().length"
-        [rows]="pageSize"
-        (select)="onSelect($event)"
-        (pageChange)="onPageChange($event)"
-        (resetFilters)="onResetFilters()"
-      />
-    </p-splitter-panel>
+  <p-card [pt]="{ body: { class: 'p-0! border-none!' } }">
+    <p-splitter
+      [panelSizes]="[28, 47, 25]"
+      [minSizes]="[20, 35, 20]"
+      [style]="{ height: 'calc(100vh - 20rem)' }"
+      class="min-h-96 overflow-hidden"
+    >
+      <!-- Document List -->
+      <p-splitter-panel>
+        <app-document-list-pane
+          [documents]="pagedDocuments()"
+          [selectedId]="selectedDocId()"
+          [first]="first()"
+          [total]="filteredDocuments().length"
+          [rows]="pageSize"
+          (select)="onSelect($event)"
+          (pageChange)="onPageChange($event)"
+          (resetFilters)="onResetFilters()"
+        />
+      </p-splitter-panel>
 
-    <p-splitter-panel>
-      <app-evidence-reader-pane
-        [document]="selectedDocument()"
-        [showRedactions]="showRedactions()"
-        (redactionChange)="onRedactionChange($event)"
-        (prev)="onStep(-1)"
-        (next)="onStep(1)"
-      />
-    </p-splitter-panel>
+      <!-- Evidence Reader -->
+      <p-splitter-panel>
+        <app-evidence-reader-pane
+          [document]="selectedDocument()"
+          [showRedactions]="showRedactions()"
+          (redactionChange)="onRedactionChange($event)"
+          (prev)="onStep(-1)"
+          (next)="onStep(1)"
+        />
+      </p-splitter-panel>
 
-    <p-splitter-panel>
-      <app-review-inspector-pane
-        [document]="selectedDocument()"
-        [role]="role()"
-        (confirm)="onConfirm($event)"
-        (reverse)="onReverse($event)"
-        (saveCoding)="onSaveCoding($event)"
-      />
-    </p-splitter-panel>
-  </p-splitter>
+      <p-splitter-panel>
+        <app-review-inspector-pane
+          [document]="selectedDocument()"
+          [role]="role()"
+          (confirm)="onConfirm($event)"
+          (reverse)="onReverse($event)"
+          (saveCoding)="onSaveCoding($event)"
+        />
+      </p-splitter-panel>
+    </p-splitter>
+  </p-card>
 </div>

@@ -1,8 +1,11 @@
 import { Component, computed, inject, linkedSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Card } from 'primeng/card';
 import { Splitter, SplitterPanel } from 'primeng/splitter';
+import { Tag } from 'primeng/tag';
 import { DashboardPageHeader } from '../../components/dashboard-page-header/dashboard-page-header';
+import { FALLBACK_MATTER, MATTERS } from '../overview/data/matters';
 import { DocumentListPane } from './components/document-list-pane/document-list-pane';
 import { EvidenceReaderPane } from './components/evidence-reader-pane/evidence-reader-pane';
 import { ReviewInspectorPane } from './components/review-inspector-pane/review-inspector-pane';
@@ -45,6 +48,8 @@ const SYNONYMS: Record<string, string[]> = {
         DocumentListPane,
         EvidenceReaderPane,
         ReviewInspectorPane,
+        Card,
+        Tag,
     ],
     templateUrl: './document-review.html',
     host: {
@@ -87,6 +92,12 @@ export class DocumentReview {
 
         return match?.custodianName ?? key;
     });
+
+    readonly corpusSize = computed(
+        () =>
+            MATTERS.find((matter) => matter.id === this.store.activeMatterId())?.reviewReady ??
+            FALLBACK_MATTER.reviewReady,
+    );
 
     readonly filteredDocuments = computed(() => {
         const { query, mode, filter, custodian } = this.filters();

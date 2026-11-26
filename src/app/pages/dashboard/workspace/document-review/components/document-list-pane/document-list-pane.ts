@@ -3,17 +3,18 @@ import { Component, input, output } from '@angular/core';
 import { ButtonDirective } from 'primeng/button';
 import { Paginator, PaginatorState } from 'primeng/paginator';
 import { Tag } from 'primeng/tag';
+import { Toolbar } from 'primeng/toolbar';
 import { ReviewDocument } from '../../models/review.models';
 
 /*
    Document List Pane
 
-   Compact, scrollable cards for the current page of filtered documents with a
-   sticky paginator footer.
+   Compact, scrollable cards for the current page of filtered documents, a
+   sticky paginator footer and a keyboard shortcut legend.
 */
 @Component({
     selector: 'app-document-list-pane',
-    imports: [DatePipe, Tag, ButtonDirective, Paginator],
+    imports: [DatePipe, Tag, ButtonDirective, Paginator, Toolbar],
     templateUrl: './document-list-pane.html',
     host: { class: 'flex h-full min-h-0 flex-col' },
 })

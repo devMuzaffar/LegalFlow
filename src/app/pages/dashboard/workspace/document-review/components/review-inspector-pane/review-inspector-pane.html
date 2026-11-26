@@ -1,13 +1,21 @@
 @if (document(); as doc) {
   <div class="flex min-h-0 flex-1 flex-col">
     <p-tabs [(value)]="activeTab" class="flex min-h-0 flex-1 flex-col">
-      <p-tabpanels class="min-h-0 flex-1 overflow-auto p-2!">
+      <p-tabpanels class="min-h-0 flex-1 overflow-auto p-0!">
+        <!-- Tab strip -->
+        <div class="border-surface mb-2 shrink-0">
+          <p-tablist>
+            <p-tab value="findings">Findings ({{ findings().length }})</p-tab>
+            <p-tab value="coding">Coding</p-tab>
+          </p-tablist>
+        </div>
+
         <!-- AI Findings -->
         <p-tabpanel value="findings">
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-2 p-2">
             @if (findings().length) {
               @for (finding of findings(); track finding.id) {
-                <article class="rounded-lg bg-surface-50 p-2.5">
+                <article class="bg-surface-50 rounded-lg p-2.5">
                   <!-- Header -->
                   <div class="flex flex-wrap items-center justify-between gap-1">
                     <div class="flex items-center gap-1">
@@ -22,21 +30,21 @@
                         [rounded]="true"
                       />
                     </div>
-                    <span class="text-xs font-medium text-muted-color"
+                    <span class="text-muted-color text-xs font-medium"
                       >{{ finding.confidence }}%</span
                     >
                   </div>
 
                   <!-- Quoted snippet -->
                   <p
-                    class="mt-1.5 rounded-sm bg-surface-0 px-1.5 py-1 font-mono text-xs leading-5 text-surface-900"
+                    class="bg-surface-0 text-surface-900 mt-1.5 rounded-sm px-1.5 py-1 font-mono text-xs leading-5"
                   >
                     “{{ snippet(finding) }}”
                   </p>
 
                   <!-- Saved reason -->
                   @if (finding.decisionReason) {
-                    <p class="mt-1.5 text-xs text-muted-color">
+                    <p class="text-muted-color mt-1.5 text-xs">
                       <span class="font-semibold">Reason:</span> {{ finding.decisionReason }}
                     </p>
                   }
@@ -107,16 +115,16 @@
                 </article>
               }
             } @else {
-              <p class="text-xs text-muted-color">No AI findings on this document.</p>
+              <p class="text-muted-color text-xs">No AI findings on this document.</p>
             }
           </div>
         </p-tabpanel>
 
         <!-- Legal Coding -->
         <p-tabpanel value="coding">
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-2 p-2">
             <div class="flex flex-col gap-1">
-              <label for="responsiveness" class="text-xs font-medium text-surface-900">
+              <label for="responsiveness" class="text-surface-900 text-xs font-medium">
                 Responsiveness
               </label>
               <p-select
@@ -131,7 +139,7 @@
             </div>
 
             <div class="flex flex-col gap-1">
-              <label for="privilege" class="text-xs font-medium text-surface-900">Privilege</label>
+              <label for="privilege" class="text-surface-900 text-xs font-medium">Privilege</label>
               <p-select
                 inputId="privilege"
                 [options]="privilegeOptions"
@@ -144,7 +152,7 @@
             </div>
 
             <div class="flex flex-col gap-1">
-              <label for="notes" class="text-xs font-medium text-surface-900">Reviewer Notes</label>
+              <label for="notes" class="text-surface-900 text-xs font-medium">Reviewer Notes</label>
               <textarea
                 pTextarea
                 id="notes"
@@ -162,24 +170,16 @@
             </button>
 
             @if (isAuditor()) {
-              <p class="text-xs text-muted-color">Read-only role — coding is disabled.</p>
+              <p class="text-muted-color text-xs">Read-only role — coding is disabled.</p>
             }
           </div>
         </p-tabpanel>
       </p-tabpanels>
-
-      <!-- Tab strip -->
-      <div class="mt-2 shrink-0 border-t border-surface pt-2">
-        <p-tablist>
-          <p-tab value="findings">Findings ({{ findings().length }})</p-tab>
-          <p-tab value="coding">Coding</p-tab>
-        </p-tablist>
-      </div>
     </p-tabs>
   </div>
 } @else {
   <div class="flex flex-1 flex-col items-center justify-center gap-2 p-6 text-center">
-    <i class="pi pi-sliders-h text-2xl text-muted-color"></i>
-    <p class="text-xs text-muted-color">No document selected.</p>
+    <i class="pi pi-sliders-h text-muted-color text-2xl"></i>
+    <p class="text-muted-color text-xs">No document selected.</p>
   </div>
 }

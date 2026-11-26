@@ -5,28 +5,18 @@ import { Card } from 'primeng/card';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
-import { SelectButton } from 'primeng/selectbutton';
-import { Tag } from 'primeng/tag';
+import { Select } from 'primeng/select';
 import { FilterChip, SearchMode } from '../../models/review.models';
 
 /*
    Review Toolbar
 
-   Search field with a semantic/boolean mode switch, filter chips, the active
-   custodian pill and an honest scope badge.
+   Search field, search-mode select and document filter on one twelve column
+   grid, with the active custodian pill dropping to its own row.
 */
 @Component({
     selector: 'app-review-toolbar',
-    imports: [
-        FormsModule,
-        ButtonDirective,
-        Card,
-        IconField,
-        InputIcon,
-        InputText,
-        SelectButton,
-        Tag,
-    ],
+    imports: [FormsModule, ButtonDirective, Card, IconField, InputIcon, InputText, Select],
     templateUrl: './review-toolbar.html',
     host: { class: 'block' },
 })
@@ -39,8 +29,6 @@ export class ReviewToolbar {
     readonly mode = input<SearchMode>('semantic');
     readonly filter = input<FilterChip>('all');
     readonly custodianName = input<string | null>(null);
-    readonly sampleSize = input<number>(0);
-    readonly corpusSize = input<number>(7610);
 
     readonly queryChange = output<string>();
     readonly modeChange = output<SearchMode>();
@@ -48,18 +36,22 @@ export class ReviewToolbar {
     readonly clearCustodian = output<void>();
 
     // Options
-    readonly modeOptions = [
-        { label: 'Semantic Demo', value: 'semantic' },
+    readonly modeOptions: { label: string; value: SearchMode }[] = [
+        { label: 'Semantic', value: 'semantic' },
         { label: 'Boolean', value: 'boolean' },
     ];
 
     readonly filterOptions: { label: string; value: FilterChip }[] = [
         { label: 'All', value: 'all' },
-        { label: 'Email Threads', value: 'threads' },
-        { label: 'PII/PHI', value: 'pii' },
+        { label: 'Threads', value: 'threads' },
+        { label: 'PII / PHI', value: 'pii' },
         { label: 'Privileged', value: 'privileged' },
         { label: 'Unreviewed', value: 'unreviewed' },
     ];
+
+    constructor() {
+        this.destroyRef.onDestroy(() => clearTimeout(this.timer));
+    }
 
     // Handlers
     onInput(event: Event): void {
