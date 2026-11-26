@@ -1,5 +1,5 @@
 // Imports
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { DashboardPageHeader } from '../../components/dashboard-page-header/dashboard-page-header';
@@ -45,7 +45,7 @@ export class Overview {
     // Vars
     private readonly reviewStore = inject(ReviewStore);
 
-    readonly activeMatterId = signal(FALLBACK_MATTER.id);
+    readonly activeMatterId = this.reviewStore.activeMatterId;
     readonly matterOptions = MATTERS.map((m) => ({ label: `${m.id} — ${m.name}`, value: m.id }));
 
     // Derived
@@ -93,6 +93,6 @@ export class Overview {
 
     // Handlers
     onMatterChange(id: string): void {
-        this.activeMatterId.set(id);
+        this.reviewStore.setActiveMatter(id);
     }
 }

@@ -51,6 +51,10 @@ export class AuditFeed {
                 return 'Coding saved';
             case 'LEGAL_HOLD_ISSUED':
                 return 'Legal hold issued';
+            case 'LEGAL_HOLD_RELEASED':
+                return 'Legal hold released';
+            case 'LEGAL_HOLD_REMINDER':
+                return 'Hold reminder sent';
         }
     }
 
@@ -58,6 +62,7 @@ export class AuditFeed {
         switch (action) {
             case 'AI_DECISION_REVERSED':
             case 'AI_REVERSED':
+            case 'LEGAL_HOLD_RELEASED':
                 return 'danger';
             case 'AI_CONFIRMED':
                 return 'info';
@@ -66,6 +71,7 @@ export class AuditFeed {
             case 'PRIVILEGE_CODED':
                 return 'info';
             case 'LEGAL_HOLD_ISSUED':
+            case 'LEGAL_HOLD_REMINDER':
                 return 'warn';
         }
     }

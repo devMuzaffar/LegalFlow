@@ -12,6 +12,8 @@ export type AuditAction =
     | 'AI_DECISION_REVERSED'
     | 'PRIVILEGE_CODED'
     | 'LEGAL_HOLD_ISSUED'
+    | 'LEGAL_HOLD_RELEASED'
+    | 'LEGAL_HOLD_REMINDER'
     | 'AI_CONFIRMED'
     | 'AI_REVERSED'
     | 'CODING_SAVED';

@@ -62,7 +62,10 @@ export type ReviewAuditAction =
     | 'AI_CONFIRMED'
     | 'AI_REVERSED'
     | 'CODING_SAVED'
-    | 'PRIVILEGE_CODED';
+    | 'PRIVILEGE_CODED'
+    | 'LEGAL_HOLD_ISSUED'
+    | 'LEGAL_HOLD_RELEASED'
+    | 'LEGAL_HOLD_REMINDER';
 
 export interface ReviewAuditEvent {
     id: string;

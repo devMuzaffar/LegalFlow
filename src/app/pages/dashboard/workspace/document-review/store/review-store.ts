@@ -96,6 +96,14 @@ export class ReviewStore {
         this._activeRole.set(role);
     }
 
+    setActiveMatter(matterId: string): void {
+        this._activeMatterId.set(matterId);
+    }
+
+    recordAuditEvent(action: ReviewAuditAction, docId: string, detail: string): void {
+        this.appendAudit(action, docId, detail);
+    }
+
     // Helpers
     private updateFinding(
         docId: string,

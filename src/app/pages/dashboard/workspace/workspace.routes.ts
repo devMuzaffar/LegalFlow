@@ -11,6 +11,10 @@ export const workspaceRoutes: Routes = [
         loadComponent: () => import('./overview/overview').then((m) => m.Overview),
     },
     {
+        path: 'matters',
+        loadComponent: () => import('./matters/matters').then((m) => m.Matters),
+    },
+    {
         path: 'document-review',
         loadComponent: () =>
             import('./document-review/document-review').then((m) => m.DocumentReview),

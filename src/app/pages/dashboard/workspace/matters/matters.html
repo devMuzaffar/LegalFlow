@@ -1,0 +1,63 @@
+<!-- Page Header -->
+<div>
+  <dashboard-page-header
+    title="Matters &amp; Legal Holds"
+    subtitle="Active litigation matters and custodian preservation tracking."
+  />
+</div>
+
+<!-- Zone 1: KPI Cards -->
+<div class="sm:col-span-4">
+  <app-matter-stat-card
+    title="Active Matters"
+    [value]="activeMattersCount()"
+    subtitle="Open litigation and regulatory inquiries"
+    icon="pi-briefcase"
+    tone="sky"
+  />
+</div>
+
+<div class="sm:col-span-4">
+  <app-matter-stat-card
+    title="Custodians on Legal Hold"
+    [value]="custodiansOnHoldCount()"
+    subtitle="Preservation notices enforced across sources"
+    icon="pi-lock"
+    tone="emerald"
+  />
+</div>
+
+<div class="sm:col-span-4">
+  <app-matter-stat-card
+    title="Overdue Acknowledgments"
+    [value]="overdueAckCount()"
+    [subtitle]="overdueAckCount() > 0 ? 'Requires preservation reminder' : 'All holds acknowledged or pending'"
+    icon="pi-exclamation-triangle"
+    [tone]="overdueAckCount() > 0 ? 'rose' : 'emerald'"
+  />
+</div>
+
+<!-- Zone 2: Matters Directory -->
+<div>
+  <app-matters-table
+    [matters]="matters()"
+    [custodianCounts]="custodianCounts()"
+    [activeMatterId]="activeMatterId()"
+    [inspectedMatterId]="inspectedMatterId()"
+    (inspect)="onInspectMatter($event)"
+    (switchActive)="onSwitchActiveMatter($event)"
+  />
+</div>
+
+<!-- Zone 3: Legal Hold Preservation Tracker -->
+<div>
+  <app-legal-hold-tracker
+    [matter]="inspectedMatter()"
+    [custodians]="inspectedCustodians()"
+    [isActiveMatter]="isInspectedActive()"
+    [ackFilter]="ackFilter()"
+    (ackFilterChange)="onAckFilterChange($event)"
+    (sendReminder)="onSendReminder($event)"
+    (toggleHold)="onToggleHold($event)"
+  />
+</div>
