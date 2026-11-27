@@ -1,3 +1,10 @@
+/*
+   Audit Feed
+
+   Recent immutable audit trail rendered as a vertical timeline. Shows the
+   action, actor role, document ID and a truncated SHA-256 hash.
+*/
+
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Tag } from 'primeng/tag';
@@ -6,12 +13,6 @@ import { Tooltip } from 'primeng/tooltip';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { AuditEntry } from '../../data/matters';
 
-/*
-   Audit Feed
-
-   Recent immutable audit trail rendered as a vertical timeline. Shows the
-   action, actor role, document ID and a truncated SHA-256 hash.
-*/
 @Component({
     selector: 'app-audit-feed',
     imports: [AppCard, Timeline, Tag, RouterLink, Tooltip],
@@ -55,6 +56,12 @@ export class AuditFeed {
                 return 'Legal hold released';
             case 'LEGAL_HOLD_REMINDER':
                 return 'Hold reminder sent';
+            case 'PROCESSING_RETRIED':
+                return 'OCR retried';
+            case 'PRODUCTION_EXPORTED':
+                return 'Manifest exported';
+            case 'PRIVILEGE_LOG_EXPORTED':
+                return 'Privilege log CSV';
         }
     }
 
@@ -65,10 +72,11 @@ export class AuditFeed {
             case 'LEGAL_HOLD_RELEASED':
                 return 'danger';
             case 'AI_CONFIRMED':
-                return 'info';
             case 'CODING_SAVED':
-                return 'info';
             case 'PRIVILEGE_CODED':
+            case 'PROCESSING_RETRIED':
+            case 'PRODUCTION_EXPORTED':
+            case 'PRIVILEGE_LOG_EXPORTED':
                 return 'info';
             case 'LEGAL_HOLD_ISSUED':
             case 'LEGAL_HOLD_REMINDER':

@@ -1,3 +1,10 @@
+/*
+   KPI Risk Flags
+
+   AI pre-scan counts for privilege, PII/PHI and human reversals, each rendered
+   as a severity tag.
+*/
+
 import { Component, computed, input } from '@angular/core';
 import { Tag } from 'primeng/tag';
 import { AppCard } from '../../../../components/app-card/app-card';
@@ -5,12 +12,6 @@ import { AppCard } from '../../../../components/app-card/app-card';
 // Constants
 const numberFormat = new Intl.NumberFormat('en-US');
 
-/*
-   KPI Risk Flags
-
-   AI pre-scan counts for privilege, PII/PHI and human reversals, each rendered
-   as a severity tag.
-*/
 @Component({
     selector: 'app-kpi-risk-flags',
     imports: [AppCard, Tag],

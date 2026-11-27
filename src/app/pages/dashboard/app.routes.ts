@@ -11,4 +11,8 @@ export const dashboardRoutes: Routes = [
         path: '',
         loadChildren: () => import('./workspace/workspace.routes').then((m) => m.workspaceRoutes),
     },
+    {
+        path: '',
+        loadChildren: () => import('./discovery/discovery.routes').then((m) => m.discoveryRoutes),
+    },
 ];

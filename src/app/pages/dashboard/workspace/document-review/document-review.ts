@@ -1,9 +1,16 @@
+/*
+   Document Review
+
+   Review and search workspace: toolbar, three-pane split layout and URL-synced
+   selection. All state lives in the root ReviewStore.
+*/
+
 import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Card } from 'primeng/card';
 import { Splitter, SplitterPanel } from 'primeng/splitter';
 import { Tag } from 'primeng/tag';
+import { AppCard } from '../../components/app-card/app-card';
 import { DashboardPageHeader } from '../../components/dashboard-page-header/dashboard-page-header';
 import { FALLBACK_MATTER, MATTERS } from '../overview/data/matters';
 import { DocumentListPane } from './components/document-list-pane/document-list-pane';
@@ -32,12 +39,6 @@ const SYNONYMS: Record<string, string[]> = {
     wire: ['transfer', 'reconciliation', 'payment'],
 };
 
-/*
-   Document Review
-
-   Review and search workspace: toolbar, three-pane split layout and URL-synced
-   selection. All state lives in the root ReviewStore.
-*/
 @Component({
     selector: 'app-document-review',
     imports: [
@@ -48,7 +49,7 @@ const SYNONYMS: Record<string, string[]> = {
         DocumentListPane,
         EvidenceReaderPane,
         ReviewInspectorPane,
-        Card,
+        AppCard,
         Tag,
     ],
     templateUrl: './document-review.html',

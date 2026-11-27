@@ -1,3 +1,10 @@
+/*
+   Document List Pane
+
+   Compact, scrollable cards for the current page of filtered documents, a
+   sticky paginator footer with rows-per-page selection and range summary.
+*/
+
 import { DatePipe } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,12 +14,6 @@ import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
 import { ReviewDocument } from '../../models/review.models';
 
-/*
-   Document List Pane
-
-   Compact, scrollable cards for the current page of filtered documents, a
-   sticky paginator footer with rows-per-page selection and range summary.
-*/
 @Component({
     selector: 'app-document-list-pane',
     imports: [DatePipe, FormsModule, Tag, ButtonDirective, Paginator, Select],

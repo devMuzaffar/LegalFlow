@@ -1,0 +1,138 @@
+<!-- Status Filter -->
+<div class="mb-3 ml-auto flex w-fit items-center justify-end">
+  <p-selectbutton
+    size="small"
+    [options]="filterOptions"
+    optionLabel="label"
+    optionValue="value"
+    [ngModel]="statusFilter()"
+    (ngModelChange)="statusFilter.set($event)"
+    [allowEmpty]="false"
+    ariaLabel="Filter processing jobs by status"
+  />
+</div>
+
+<app-card
+  title="Container Processing Ledger"
+  subtitle="Hover exception tags for OCR diagnostics; retry failed containers inline."
+>
+  <p-table [value]="rows()" dataKey="id" [showGridlines]="false">
+    <ng-template #header>
+      <tr>
+        <th>Job ID</th>
+        <th>Container &amp; Custodian</th>
+        <th>Stage</th>
+        <th class="text-right">In → Out</th>
+        <th>Dedup %</th>
+        <th class="text-right">Exceptions</th>
+        <th>Status</th>
+        <th class="text-right">Action</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-j>
+      <tr [class]="j.status === 'EXCEPTION' ? 'bg-rose-50/50' : ''">
+        <td>
+          <div class="flex flex-col whitespace-nowrap">
+            <span class="text-surface-900 font-mono text-xs font-semibold">{{ j.id }}</span>
+            <span class="text-muted-color text-[11px] tabular-nums">{{ j.startedAt }}</span>
+          </div>
+        </td>
+
+        <td>
+          <div class="flex flex-col">
+            <span
+              class="text-surface-900 w-36 truncate font-mono text-xs font-medium"
+              [pTooltip]="j.containerName"
+              tooltipPosition="top"
+              [showDelay]="150"
+            >
+              {{ j.containerName }}
+            </span>
+            <span class="text-muted-color text-xs">{{ j.custodianName }}</span>
+          </div>
+        </td>
+
+        <td>
+          <p-tag
+            class="whitespace-nowrap"
+            [value]="stageLabel(j.stage)"
+            [severity]="stageSeverity(j.stage)"
+          />
+        </td>
+
+        <td class="text-right text-xs whitespace-nowrap tabular-nums">
+          <span class="text-muted-color">{{ j.docsIn | number }} → </span>
+          <span class="text-surface-900 font-semibold">{{ j.docsOut | number }}</span>
+        </td>
+
+        <td>
+          <div class="flex items-center gap-2">
+            <p-progressbar
+              class="w-12"
+              [value]="j.dedupPct"
+              [showValue]="false"
+              [style]="{ height: '4px' }"
+            />
+            <span class="text-muted-color w-8 text-right text-xs tabular-nums">
+              {{ j.dedupPct }}%
+            </span>
+          </div>
+        </td>
+
+        <td class="text-right">
+          @if (j.exceptions > 0) {
+            <p-tag
+              class="cursor-help whitespace-nowrap"
+              [value]="j.exceptions.toString()"
+              severity="danger"
+              [pTooltip]="j.errorNote ?? 'OCR processing exception'"
+              tooltipPosition="top"
+              [showDelay]="150"
+            />
+          } @else {
+            <span class="text-muted-color text-xs tabular-nums">0</span>
+          }
+        </td>
+
+        <td>
+          <p-tag
+            class="whitespace-nowrap"
+            [value]="statusLabel(j.status)"
+            [severity]="statusSeverity(j.status)"
+          />
+        </td>
+
+        <td class="text-right">
+          @if (j.status === 'EXCEPTION') {
+            <button
+              pButton
+              type="button"
+              size="small"
+              [text]="true"
+              severity="warn"
+              [iconOnly]="true"
+              pTooltip="Retry OCR"
+              tooltipPosition="top"
+              [showDelay]="150"
+              aria-label="Retry OCR"
+              (click)="onRetryOcr(j.id)"
+            >
+              <i class="pi pi-refresh text-xs"></i>
+            </button>
+          } @else {
+            <span class="text-muted-color text-xs">—</span>
+          }
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="8" class="text-muted-color py-6 text-center text-xs">
+          No processing jobs match the selected status.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</app-card>

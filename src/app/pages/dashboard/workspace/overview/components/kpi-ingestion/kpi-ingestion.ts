@@ -1,14 +1,15 @@
-import { DecimalPipe } from '@angular/common';
-import { Component, input } from '@angular/core';
-import { Tag } from 'primeng/tag';
-import { AppCard } from '../../../../components/app-card/app-card';
-
 /*
    KPI Ingestion
 
    Ingested volume against review-ready documents, with the SHA-256 dedup
    yield as a percentage.
 */
+
+import { DecimalPipe } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { Tag } from 'primeng/tag';
+import { AppCard } from '../../../../components/app-card/app-card';
+
 @Component({
     selector: 'app-kpi-ingestion',
     imports: [AppCard, Tag, DecimalPipe],

@@ -1,3 +1,10 @@
+/*
+   Review Inspector Pane
+
+   Reversible AI findings and the legal coding form. Reversals require a reason
+   before they can be submitted; coding saves are blocked for auditors.
+*/
+
 import { Component, computed, input, linkedSignal, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonDirective } from 'primeng/button';
@@ -14,12 +21,6 @@ import {
     ReviewerRole,
 } from '../../models/review.models';
 
-/*
-   Review Inspector Pane
-
-   Reversible AI findings and the legal coding form. Reversals require a reason
-   before they can be submitted; coding saves are blocked for auditors.
-*/
 @Component({
     selector: 'app-review-inspector-pane',
     imports: [

@@ -1,5 +1,9 @@
 <!-- BEGIN:angular-agent-rules -->
 
+Remain succint whole chat ensure replies are short as possible and only explain longer when I told you to do so. Remain unoptimistic, truthful, english that is more understandable for south east asian people. No sugar coating.
+
+Rewrite AI text so it reads human. Keep all facts, names, numbers, quotes, citations. Do not invent. If detail is missing, ask or simplify. Fiction is exempt.
+
 # This is Angular 21 + PrimeNG 22
 
 Not Next.js. No `.tsx`, no hooks, no `use client`. Everything is a standalone
@@ -17,6 +21,13 @@ component with signals. PrimeNG v22 renamed/removed APIs — check
 - `<ng-template #body let-row>` (not `pTemplate="body"`)
 - Native `class="..."` (not `styleClass`)
 - Theme from `@primeuix/themes` (not `@primeng/themes`)
+
+## Page Grid
+
+Every page under `src/app/pages/dashboard` is a flat list of grid-item
+wrappers on the layout's 12-column grid. Follow
+`.github/instructions/dashboard-page-grid.instructions.md` for span tokens,
+wrapper rules and the component host contract before writing a route template.
 
 ## Code Commenting Rules
 
@@ -60,8 +71,9 @@ const PAGE_SIZE = 10;
 <app-user-table />
 ```
 
-- Component `.ts` files: add a block comment right above `@Component` holding
-  the component name in Title Case (indented 3 spaces), a blank line, then one
+- Component `.ts` files: the block comment goes at the very top of the file,
+  above the imports — never between the imports and `@Component`. Holds the
+  component name in Title Case (indented 3 spaces), a blank line, then one
   short paragraph on what the component renders:
 
 ```ts
@@ -71,6 +83,9 @@ const PAGE_SIZE = 10;
    Dashboard panel container. Takes a title and optional subtitle, and projects
    anything marked `action` to the right edge of the header line.
 */
+
+import { Component, input } from '@angular/core';
+
 @Component({ ... })
 ```
 

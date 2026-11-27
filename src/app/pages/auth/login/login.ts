@@ -1,3 +1,10 @@
+/*
+   Login
+
+   Login screen: credentials form plus one-tap demo role buttons under the
+   "OR TRY DEMO" divider.
+*/
+
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,12 +24,6 @@ export interface DemoRole {
   description: string;
 }
 
-/*
-   Login
-
-   Login screen: credentials form plus one-tap demo role buttons under the
-   "OR TRY DEMO" divider.
-*/
 @Component({
   selector: 'app-login',
   imports: [

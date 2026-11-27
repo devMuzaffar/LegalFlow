@@ -1,3 +1,10 @@
+/*
+   Overview
+
+   ECA Command Center. Holds the active matter and the KPIs derived from it;
+   every zone is a presentational component that receives plain values.
+*/
+
 // Imports
 import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -17,12 +24,6 @@ import {
 } from './components';
 import { FALLBACK_MATTER, MATTERS } from './data/matters';
 
-/*
-   Overview
-
-   ECA Command Center. Holds the active matter and the KPIs derived from it;
-   every zone is a presentational component that receives plain values.
-*/
 @Component({
     selector: 'app-overview',
     imports: [

@@ -1,0 +1,50 @@
+<!-- Page Header -->
+<div>
+  <dashboard-page-header
+    title="Productions &amp; Privilege Logs"
+    subtitle="Bates-numbered court exports, redaction manifests and withheld privilege logs."
+  >
+    <p-tag [value]="activeMatterId()" severity="secondary" />
+  </dashboard-page-header>
+</div>
+
+<!-- Zone 1: KPI Cards -->
+<div class="sm:col-span-4">
+  <app-discovery-stat-card
+    title="Total Produced Docs"
+    [value]="totalProducedDocs()"
+    [subtitle]="'Packaged across ' + batchCount() + ' export sets'"
+    icon="pi-file-export"
+    tone="sky"
+  />
+</div>
+
+<div class="sm:col-span-4">
+  <app-discovery-stat-card
+    title="Redacted Documents"
+    [value]="redactedDocuments()"
+    subtitle="PII and PHI spans masked prior to Bates stamp"
+    icon="pi-eye-slash"
+    tone="amber"
+  />
+</div>
+
+<div class="sm:col-span-4">
+  <app-discovery-stat-card
+    title="Privileged Withheld"
+    [value]="privilegedWithheld()"
+    subtitle="Logged on court privilege schedule"
+    icon="pi-shield"
+    tone="rose"
+  />
+</div>
+
+<!-- Zone 2: Production Batches -->
+<div>
+  <app-production-batches-table />
+</div>
+
+<!-- Zone 3: Withheld Privilege Log -->
+<div>
+  <app-privilege-log-table />
+</div>

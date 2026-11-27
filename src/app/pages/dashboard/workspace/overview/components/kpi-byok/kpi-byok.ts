@@ -1,12 +1,13 @@
-import { Component, input } from '@angular/core';
-import { Tag } from 'primeng/tag';
-import { AppCard } from '../../../../components/app-card/app-card';
-
 /*
    KPI Byok
 
    Bring-your-own-key vault size, token usage and the per-document AI fee.
 */
+
+import { Component, input } from '@angular/core';
+import { Tag } from 'primeng/tag';
+import { AppCard } from '../../../../components/app-card/app-card';
+
 @Component({
     selector: 'app-kpi-byok',
     imports: [AppCard, Tag],

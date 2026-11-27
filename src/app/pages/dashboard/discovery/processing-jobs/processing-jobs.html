@@ -1,0 +1,59 @@
+<!-- Page Header -->
+<div>
+  <dashboard-page-header
+    title="Processing &amp; Deduplication"
+    subtitle="Container extraction, SHA-256 deduplication, OCR and threading status."
+  >
+    <p-tag [value]="activeMatterId()" severity="secondary" />
+  </dashboard-page-header>
+</div>
+
+<!-- Zone 1: KPI Cards -->
+<div class="sm:col-span-6 lg:col-span-3">
+  <app-discovery-stat-card
+    title="Total Ingested"
+    [value]="totalIngested()"
+    [subtitle]="containerCount() + ' source containers unpacked'"
+    icon="pi-database"
+    tone="sky"
+  />
+</div>
+
+<div class="sm:col-span-6 lg:col-span-3">
+  <app-discovery-stat-card
+    title="Duplicates Removed"
+    [value]="duplicatesRemoved()"
+    subtitle="Exact SHA-256 hash pruning before review"
+    icon="pi-filter"
+    tone="emerald"
+    [badge]="overallDedupPct() + '%'"
+    badgeSeverity="success"
+  />
+</div>
+
+<div class="sm:col-span-6 lg:col-span-3">
+  <app-discovery-stat-card
+    title="OCR Exceptions"
+    [value]="exceptionsCount()"
+    [subtitle]="
+      exceptionsCount() > 0 ? 'Unreadable files require OCR retry' : 'All containers OCR-verified'
+    "
+    icon="pi-exclamation-triangle"
+    [tone]="exceptionsCount() > 0 ? 'rose' : 'emerald'"
+  />
+</div>
+
+<div class="sm:col-span-6 lg:col-span-3">
+  <app-discovery-stat-card
+    title="Active Jobs"
+    [value]="activeJobsCount()"
+    [subtitle]="activeJobsCount() > 0 ? 'Running or queued in pipeline' : 'Queue idle'"
+    icon="pi-cog"
+    [tone]="activeJobsCount() > 0 ? 'amber' : 'emerald'"
+  />
+</div>
+
+<!-- Zone 2: Jobs Table -->
+<div>
+  <app-processing-jobs-table />
+</div>

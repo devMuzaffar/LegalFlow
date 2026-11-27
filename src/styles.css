@@ -3,3 +3,19 @@
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
 @import 'primeicons/primeicons.css';
+
+/* 
+  PrimeNg Component Styling
+*/
+
+/* Table Headers */
+p-table .p-datatable-thead > tr > th {
+  font-size: 0.75rem;
+}
+
+/* Padding for Table Headers & Data */
+p-table .p-datatable-thead > tr > th,
+p-table .p-datatable-tbody > tr > td {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}

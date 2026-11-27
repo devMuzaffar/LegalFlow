@@ -1,3 +1,10 @@
+/*
+   Custodian Risk
+
+   Per-custodian document and risk counts with a review progress column. The
+   inspect action routes to the review queue filtered by custodian.
+*/
+
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -8,12 +15,6 @@ import { Tag } from 'primeng/tag';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { Custodian } from '../../data/matters';
 
-/*
-   Custodian Risk
-
-   Per-custodian document and risk counts with a review progress column. The
-   inspect action routes to the review queue filtered by custodian.
-*/
 @Component({
     selector: 'app-custodian-risk',
     imports: [AppCard, TableModule, Tag, RouterLink, ButtonDirective, DecimalPipe, ProgressBar],

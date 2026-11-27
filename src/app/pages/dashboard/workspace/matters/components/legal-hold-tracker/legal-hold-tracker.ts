@@ -1,3 +1,11 @@
+/*
+   Legal Hold Tracker
+
+   Custodian preservation table for the inspected matter. Supports status
+   filtering, sending preservation reminders, toggling holds and jumping to
+   document review for active matter custodians.
+*/
+
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,13 +18,6 @@ import { Tooltip } from 'primeng/tooltip';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { AckFilter, HoldAckStatus, LegalHoldCustodian, MatterRecord } from '../../models/matters.models';
 
-/*
-   Legal Hold Tracker
-
-   Custodian preservation table for the inspected matter. Supports status
-   filtering, sending preservation reminders, toggling holds and jumping to
-   document review for active matter custodians.
-*/
 @Component({
     selector: 'app-legal-hold-tracker',
     imports: [

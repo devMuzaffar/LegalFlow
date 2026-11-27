@@ -1,3 +1,10 @@
+/*
+   Matters Table
+
+   Directory of active and archived litigation matters. Clicking a row selects
+   it for legal-hold inspection; Switch Active promotes it workspace-wide.
+*/
+
 import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { ButtonDirective } from 'primeng/button';
@@ -6,12 +13,6 @@ import { Tag } from 'primeng/tag';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { MatterRecord, MatterStatus } from '../../models/matters.models';
 
-/*
-   Matters Table
-
-   Directory of active and archived litigation matters. Clicking a row selects
-   it for legal-hold inspection; Switch Active promotes it workspace-wide.
-*/
 @Component({
     selector: 'app-matters-table',
     imports: [AppCard, TableModule, Tag, ButtonDirective, DecimalPipe],

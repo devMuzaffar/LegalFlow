@@ -1,14 +1,15 @@
-import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { AppCard } from '../../../../components/app-card/app-card';
-import { StatTone } from '../../models/matters.models';
-
 /*
    Matter Stat Card
 
    Compact KPI panel for the Matters header strip. Displays a live count,
    supporting subtitle and a tone-coded icon badge.
 */
+
+import { DecimalPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { AppCard } from '../../../../components/app-card/app-card';
+import { StatTone } from '../../models/matters.models';
+
 @Component({
     selector: 'app-matter-stat-card',
     imports: [AppCard, DecimalPipe],
@@ -42,7 +43,7 @@ export class MatterStatCard {
         this.tone() === 'rose'
             ? 'text-rose-700'
             : this.tone() === 'emerald'
-              ? 'text-emerald-700'
-              : 'text-surface-900',
+                ? 'text-emerald-700'
+                : 'text-surface-900',
     );
 }

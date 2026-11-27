@@ -1,3 +1,10 @@
+/*
+   Evidence Reader Pane
+
+   Sticky metadata bar plus the stacked thread reader. Findings render as typed
+   segments produced by the offset splitter, never via `[innerHTML]`.
+*/
+
 import { DatePipe } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,12 +15,6 @@ import { Tooltip } from 'primeng/tooltip';
 import { MockAIFinding, ReviewDocument } from '../../models/review.models';
 import { buildSegments } from '../../utils/text-segments';
 
-/*
-   Evidence Reader Pane
-
-   Sticky metadata bar plus the stacked thread reader. Findings render as typed
-   segments produced by the offset splitter, never via `[innerHTML]`.
-*/
 @Component({
     selector: 'app-evidence-reader-pane',
     imports: [FormsModule, DatePipe, Avatar, ButtonDirective, ToggleSwitch, Tooltip],

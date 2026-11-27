@@ -65,7 +65,10 @@ export type ReviewAuditAction =
     | 'PRIVILEGE_CODED'
     | 'LEGAL_HOLD_ISSUED'
     | 'LEGAL_HOLD_RELEASED'
-    | 'LEGAL_HOLD_REMINDER';
+    | 'LEGAL_HOLD_REMINDER'
+    | 'PROCESSING_RETRIED'
+    | 'PRODUCTION_EXPORTED'
+    | 'PRIVILEGE_LOG_EXPORTED';
 
 export interface ReviewAuditEvent {
     id: string;

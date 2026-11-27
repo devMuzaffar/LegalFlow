@@ -1,22 +1,23 @@
-import { Component, DestroyRef, inject, input, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ButtonDirective } from 'primeng/button';
-import { Card } from 'primeng/card';
-import { IconField } from 'primeng/iconfield';
-import { InputIcon } from 'primeng/inputicon';
-import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
-import { FilterChip, SearchMode } from '../../models/review.models';
-
 /*
    Review Toolbar
 
    Search field, search-mode select and document filter on one twelve column
    grid, with the active custodian pill dropping to its own row.
 */
+
+import { Component, DestroyRef, inject, input, output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonDirective } from 'primeng/button';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { InputText } from 'primeng/inputtext';
+import { Select } from 'primeng/select';
+import { AppCard } from '../../../../components/app-card/app-card';
+import { FilterChip, SearchMode } from '../../models/review.models';
+
 @Component({
     selector: 'app-review-toolbar',
-    imports: [FormsModule, ButtonDirective, Card, IconField, InputIcon, InputText, Select],
+    imports: [FormsModule, ButtonDirective, AppCard, IconField, InputIcon, InputText, Select],
     templateUrl: './review-toolbar.html',
     host: { class: 'block' },
 })

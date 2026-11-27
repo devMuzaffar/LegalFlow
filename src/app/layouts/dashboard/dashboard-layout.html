@@ -30,13 +30,14 @@
     <div class="flex min-h-0 flex-1 flex-col overflow-auto">
       <!-- Grid: router-outlet hidden, page host dissolved, children span 12 by default -->
       <main
-        class="grid flex-1 grid-cols-12 content-start gap-4 p-4 [&>*:not(router-outlet)]:contents [&>router-outlet]:hidden [:where(&)>*>*]:col-span-12"
+        class="grid shrink-0 grid-cols-12 content-start gap-4 p-4 [&>*:not(router-outlet)]:contents [&>router-outlet]:hidden [:where(&)>*>*]:col-span-12"
       >
         <router-outlet />
       </main>
 
       <!-- Footer -->
-      <footer class="border-surface h-12 border-t p-4">
+      <!-- mt-auto pins it to the bottom on short pages, flows after content on tall ones -->
+      <footer class="border-surface mt-auto h-12 shrink-0 border-t p-4">
         <p class="text-muted-color text-xs">© {{ year }} LegalFlow. All rights reserved.</p>
       </footer>
     </div>

@@ -1,3 +1,10 @@
+/*
+   Pipeline Strip
+
+   Automated processing pipeline as a five-step tracker. Each step carries a
+   hover stat and its own progress bar.
+*/
+
 import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProgressBar } from 'primeng/progressbar';
@@ -6,12 +13,6 @@ import { Tooltip } from 'primeng/tooltip';
 import { AppCard } from '../../../../components/app-card/app-card';
 import { PipelineStep } from '../../data/matters';
 
-/*
-   Pipeline Strip
-
-   Automated processing pipeline as a five-step tracker. Each step carries a
-   hover stat and its own progress bar.
-*/
 @Component({
     selector: 'app-pipeline-strip',
     imports: [AppCard, RouterLink, ProgressBar, Tag, Tooltip],

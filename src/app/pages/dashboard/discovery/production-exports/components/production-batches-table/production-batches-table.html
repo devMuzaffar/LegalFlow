@@ -1,0 +1,147 @@
+<app-card
+  title="Production Batches"
+  subtitle="Court-ready Bates ranges, loadfile formats and export manifests."
+>
+  <p-tag action [value]="rows().length + ' batches'" severity="secondary" />
+
+  <p-table [value]="rows()" dataKey="id" [showGridlines]="false">
+    <ng-template #header>
+      <tr>
+        <th>Batch ID</th>
+        <th>Date</th>
+        <th>Production</th>
+        <th>Bates Range</th>
+        <th>Format</th>
+        <th class="text-right">Docs</th>
+        <th>Status</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-b>
+      <tr>
+        <td class="text-surface-900 font-mono text-xs font-semibold whitespace-nowrap">
+          {{ b.id }}
+        </td>
+
+        <td class="text-muted-color text-xs whitespace-nowrap tabular-nums">
+          {{ b.createdAt | date: 'dd MMM yyyy' }}
+        </td>
+
+        <td>
+          <div class="flex flex-col">
+            <span class="text-surface-900 font-medium">{{ b.name }}</span>
+            <span class="text-muted-color text-xs whitespace-nowrap tabular-nums">
+              {{ b.withheldPrivileged | number }} withheld
+            </span>
+          </div>
+        </td>
+
+        <td>
+          <span
+            class="bg-surface-100 text-surface-900 inline-block rounded-md px-2 py-0.5 font-mono text-xs whitespace-nowrap"
+          >
+            {{ b.batesStart }}–{{ b.batesEnd }}
+          </span>
+        </td>
+
+        <td class="text-muted-color text-xs">{{ b.format }}</td>
+
+        <td class="text-right text-xs tabular-nums">
+          <div class="flex flex-col items-end whitespace-nowrap">
+            <span class="text-surface-900 font-semibold">{{ b.docCount | number }} docs</span>
+            <span class="text-muted-color text-[11px]"
+              >{{ b.redactedCount | number }} redacted</span
+            >
+          </div>
+        </td>
+
+        <td>
+          <p-tag
+            class="whitespace-nowrap"
+            [value]="statusLabel(b.status)"
+            [severity]="statusSeverity(b.status)"
+          />
+        </td>
+
+        <td class="text-right">
+          <div class="inline-flex items-center justify-end">
+            <button
+              pButton
+              type="button"
+              size="small"
+              [text]="true"
+              severity="secondary"
+              [iconOnly]="true"
+              pTooltip="Preview manifest"
+              tooltipPosition="top"
+              [showDelay]="150"
+              aria-label="Preview batch manifest"
+              (click)="openPreview(b)"
+            >
+              <i class="pi pi-eye text-xs"></i>
+            </button>
+
+            <button
+              pButton
+              type="button"
+              size="small"
+              [text]="true"
+              severity="secondary"
+              [iconOnly]="true"
+              pTooltip="Export JSON manifest"
+              tooltipPosition="top"
+              [showDelay]="150"
+              [disabled]="b.status === 'DRAFT'"
+              aria-label="Export JSON manifest"
+              (click)="onExportManifest(b.id)"
+            >
+              <i class="pi pi-download text-xs"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="8" class="text-muted-color py-6 text-center text-xs">
+          No production batches have been created for this matter.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</app-card>
+
+<p-drawer
+  [visible]="drawerVisible()"
+  (visibleChange)="onDrawerVisibleChange($event)"
+  position="right"
+  [header]="previewBatch() ? previewBatch()!.id + ' Manifest Preview' : 'Manifest Preview'"
+  [pt]="{ root: { class: 'w-full! sm:w-105!' } }"
+>
+  @if (previewBatch(); as batch) {
+    <div class="flex flex-col gap-3">
+      <div class="border-surface bg-surface-50 rounded-lg border p-3 text-xs">
+        <p class="text-surface-900 font-semibold">{{ batch.name }}</p>
+        <p class="text-muted-color mt-1 font-mono">{{ batch.batesStart }} – {{ batch.batesEnd }}</p>
+        <p class="text-muted-color mt-1">{{ batch.format }}</p>
+      </div>
+
+      <pre
+        class="border-surface bg-surface-50 text-surface-900 overflow-auto rounded-lg border p-3 font-mono text-xs leading-5"
+        >{{ previewJson() }}</pre>
+
+      <button
+        pButton
+        type="button"
+        size="small"
+        [disabled]="batch.status === 'DRAFT'"
+        (click)="onExportManifest(batch.id)"
+      >
+        <i class="pi pi-download text-xs"></i>
+        Export JSON
+      </button>
+    </div>
+  }
+</p-drawer>

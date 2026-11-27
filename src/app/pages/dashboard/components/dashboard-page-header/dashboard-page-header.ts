@@ -1,11 +1,12 @@
-import { Component, input } from '@angular/core';
-
 /*
    Dashboard Page Header
 
    Page title with optional subtitle and a right-aligned action slot for page
    level controls.
 */
+
+import { Component, input } from '@angular/core';
+
 @Component({
     selector: 'dashboard-page-header',
     templateUrl: './dashboard-page-header.html',

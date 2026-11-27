@@ -1,14 +1,15 @@
-import { DecimalPipe } from '@angular/common';
-import { Component, input } from '@angular/core';
-import { ProgressBar } from 'primeng/progressbar';
-import { AppCard } from '../../../../components/app-card/app-card';
-
 /*
    KPI Review Velocity
 
    Coding progress against pending documents, visualised with a PrimeNG
    progress bar.
 */
+
+import { DecimalPipe } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { ProgressBar } from 'primeng/progressbar';
+import { AppCard } from '../../../../components/app-card/app-card';
+
 @Component({
     selector: 'app-kpi-review-velocity',
     imports: [AppCard, ProgressBar, DecimalPipe],

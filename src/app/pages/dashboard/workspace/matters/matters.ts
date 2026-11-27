@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { DashboardPageHeader } from '../../components/dashboard-page-header/dashboard-page-header';
-import { LegalHoldTracker, MatterStatCard, MattersTable } from './components';
-import { AckFilter } from './models/matters.models';
-import { MattersStore } from './store/matters-store';
-
 /*
    Matters
 
    Matters & Legal Holds workspace. Holds live KPI counts, the inspected
    matter selection and delegates preservation actions to MattersStore.
 */
+
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { DashboardPageHeader } from '../../components/dashboard-page-header/dashboard-page-header';
+import { LegalHoldTracker, MatterStatCard, MattersTable } from './components';
+import { AckFilter } from './models/matters.models';
+import { MattersStore } from './store/matters-store';
+
 @Component({
     selector: 'app-matters',
     imports: [DashboardPageHeader, MatterStatCard, MattersTable, LegalHoldTracker],

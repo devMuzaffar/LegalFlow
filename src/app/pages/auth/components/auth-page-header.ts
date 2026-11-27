@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
-
 /*
    Auth Page Header
 
    Title and optional subtitle block reused by the auth screens.
 */
+
+import { Component, input } from '@angular/core';
+
 @Component({
   selector: 'auth-page-header',
   template: `
